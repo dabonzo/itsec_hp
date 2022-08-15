@@ -71,9 +71,10 @@ Password:                  | DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 
 ### Resources
 
-[Bandit-level7@overthewire](https://overthewire.org/wargames/bandit/bandit7.html)   
-[man page for find command @man7.org](https://man7.org/linux/man-pages/man1/find.1.html)    
-[BASH Shell Redirect Output and Errors To /dev/null @cyberciti.biz](https://www.cyberciti.biz/faq/how-to-redirect-output-and-errors-to-devnull/)    
+??? info "Resources"
+    [Bandit-level7@overthewire](https://overthewire.org/wargames/bandit/bandit7.html)   
+    [man page for find command @man7.org](https://man7.org/linux/man-pages/man1/find.1.html)    
+    [BASH Shell Redirect Output and Errors To /dev/null @cyberciti.biz](https://www.cyberciti.biz/faq/how-to-redirect-output-and-errors-to-devnull/)    
 
 
 

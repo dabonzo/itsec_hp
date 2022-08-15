@@ -101,8 +101,10 @@ Password:                  | koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 
 ### Resources
 
-[Bandit-level6@overthewire](https://overthewire.org/wargames/bandit/bandit6.html)       
-[man page for find command @man7.org](https://man7.org/linux/man-pages/man1/find.1.html)        
+??? info "Resources"
+
+    [Bandit-level6@overthewire](https://overthewire.org/wargames/bandit/bandit6.html)       
+    [man page for find command @man7.org](https://man7.org/linux/man-pages/man1/find.1.html)        
 
 
 

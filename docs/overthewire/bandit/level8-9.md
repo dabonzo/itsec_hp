@@ -65,8 +65,9 @@ Password:                  | cvX2JJa4CFALtqS87jk27qwqGhBM9plV
 
 ### Resources
 
-[Bandit-level9@overthewire](https://overthewire.org/wargames/bandit/bandit9.html)       
-[uniq @linux.die.net](https://linux.die.net/man/1/uniq)     
+??? info "Resources"
+    [Bandit-level9@overthewire](https://overthewire.org/wargames/bandit/bandit9.html)       
+    [uniq @linux.die.net](https://linux.die.net/man/1/uniq)     
 
 
 

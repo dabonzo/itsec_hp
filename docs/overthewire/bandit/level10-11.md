@@ -72,13 +72,14 @@ Password:                  | truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
 
 ### Resources
 
-[Bandit-level11@overthewire](https://overthewire.org/wargames/bandit/bandit11.html)     
-[How to check whether a string is Base64 encoded or not](https://stackoverflow.com/questions/8571501/how-to-check-whether-a-string-is-base64-encoded-or-not)               
-[man page for base64 command @man7.org](https://man7.org/linux/man-pages/man1/base64.1.html)        
-[base64 @wikipedia.org](https://en.wikipedia.org/wiki/Base64)       
-[online base64 decoding with cyberchef ](https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)&input=VkdobElIQmhjM04zYjNKa0lHbHpJRWxHZFd0M1MwZHpSbGM0VFU5eE0wbFNSbkZ5ZUVVeGFIaFVUa1ZpVlZCU0NnPT0K)
+??? info "Resources"
+    [Bandit-level11@overthewire](https://overthewire.org/wargames/bandit/bandit11.html)     
+    [How to check whether a string is Base64 encoded or not](https://stackoverflow.com/questions/8571501/how-to-check-whether-a-string-is-base64-encoded-or-not)               
+    [man page for base64 command @man7.org](https://man7.org/linux/man-pages/man1/base64.1.html)        
+    [base64 @wikipedia.org](https://en.wikipedia.org/wiki/Base64)       
+    [online base64 decoding with cyberchef ](https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)&input=VkdobElIQmhjM04zYjNKa0lHbHpJRWxHZFd0M1MwZHpSbGM0VFU5eE0wbFNSbkZ5ZUVVeGFIaFVUa1ZpVlZCU0NnPT0K)
 
-  
+    
 
 
 

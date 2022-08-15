@@ -118,11 +118,13 @@ Password:                  | UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
 ### Resources
 
-[Bandit-level5@overthewire.org](https://overthewire.org/wargames/bandit/bandit5.html)   
-[tr and cut @geeksforgeeks.org](https://www.geeksforgeeks.org/tr-command-in-unix-linux-with-examples/)  
-[find human readable files @stackexchange.com](https://unix.stackexchange.com/questions/313442/find-human-readable-files)   
-[What is command substitution in a shell? @stackexchange](https://unix.stackexchange.com/questions/440088/what-is-command-substitution-in-a-shell)  
-[What are One-liners @linuxconfig.org](https://linuxconfig.org/linux-complex-bash-one-liner-examples)
+??? info "Resources"
+
+    [Bandit-level5@overthewire.org](https://overthewire.org/wargames/bandit/bandit5.html)   
+    [tr and cut @geeksforgeeks.org](https://www.geeksforgeeks.org/tr-command-in-unix-linux-with-examples/)  
+    [find human readable files @stackexchange.com](https://unix.stackexchange.com/questions/313442/find-human-readable-files)   
+    [What is command substitution in a shell? @stackexchange](https://unix.stackexchange.com/questions/440088/what-is-command-substitution-in-a-shell)  
+    [What are One-liners @linuxconfig.org](https://linuxconfig.org/linux-complex-bash-one-liner-examples)
 
 
 

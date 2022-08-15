@@ -68,7 +68,7 @@ Password:                  | 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 
 ### Resources
 
-??? done "Resources"
+??? info "Resources"
 
     [Bandit-level14@overthewire](https://overthewire.org/wargames/bandit/bandit14.html)           
     [SSH/OpenSSH/Keys](https://help.ubuntu.com/community/SSH/OpenSSH/Keys) 

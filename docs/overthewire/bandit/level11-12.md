@@ -71,12 +71,14 @@ Password:                  | IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 
 ### Resources
 
-[Bandit-level12@overthewire](https://overthewire.org/wargames/bandit/bandit12.html)     
-[Rot13 on Wikipedia](https://en.wikipedia.org/wiki/Rot13)       
-[man page for tr command @man7.org](https://man7.org/linux/man-pages/man1/tr.1.html)        
-[How to decode rot13 @askubuntu.com](https://askubuntu.com/questions/1085069/how-can-i-decode-a-file-where-each-letter-has-been-replaced-with-the-letter-13-l)      
-[rot13 encoder/decoder @rot13.com](https://rot13.com/)      
-[rot13 encoder/decoder @cyberchef](https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,13)&input=R3VyIGNuZmZqYmVxIHZm)       
+??? info "Resources"
+
+    [Bandit-level12@overthewire](https://overthewire.org/wargames/bandit/bandit12.html)     
+    [Rot13 on Wikipedia](https://en.wikipedia.org/wiki/Rot13)       
+    [man page for tr command @man7.org](https://man7.org/linux/man-pages/man1/tr.1.html)        
+    [How to decode rot13 @askubuntu.com](https://askubuntu.com/questions/1085069/how-can-i-decode-a-file-where-each-letter-has-been-replaced-with-the-letter-13-l)      
+    [rot13 encoder/decoder @rot13.com](https://rot13.com/)      
+    [rot13 encoder/decoder @cyberchef](https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,13)&input=R3VyIGNuZmZqYmVxIHZm)       
 
 
   

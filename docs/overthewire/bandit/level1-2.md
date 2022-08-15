@@ -59,13 +59,16 @@ Password:                  | boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 
 
 ### Resources
-[Bandit-level2@overthewire](https://overthewire.org/wargames/bandit/bandit2.html)       
-[Google Search for “dashed filename”](https://www.google.com/search?q=dashed+filename)      
-[Advanced Bash-scripting Guide - Chapter 3 - Special Characters](http://tldp.org/LDP/abs/html/special-chars.html)       
-[What does "--" (double-dash) mean?](https://unix.stackexchange.com/questions/11376/what-does-double-dash-mean)     
-[Absolute and Relative Pathnames in UNIX @geeksforgeeks.org](https://www.geeksforgeeks.org/absolute-relative-pathnames-unix/)
+
+??? info "Resources"
+
+    [Bandit-level2@overthewire](https://overthewire.org/wargames/bandit/bandit2.html)       
+    [Google Search for “dashed filename”](https://www.google.com/search?q=dashed+filename)      
+    [Advanced Bash-scripting Guide - Chapter 3 - Special Characters](http://tldp.org/LDP/abs/html/special-chars.html)       
+    [What does "--" (double-dash) mean?](https://unix.stackexchange.com/questions/11376/what-does-double-dash-mean)     
+    [Absolute and Relative Pathnames in UNIX @geeksforgeeks.org](https://www.geeksforgeeks.org/absolute-relative-pathnames-unix/)
 
 
 
 
- 
+    

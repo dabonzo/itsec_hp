@@ -60,9 +60,10 @@ Password:                  | CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 
 ### Resources
 
-[Bandit-level3@overthewire](https://overthewire.org/wargames/bandit/bandit3.html)   
-[How to reference filename with spaces in Linux](https://linuxhint.com/reference-filename-with-spaces-linux/)   
-[Google Search for “spaces in filename”](https://www.google.com/search?q=spaces+in+filename)    
+??? info "Resources"
+    [Bandit-level3@overthewire](https://overthewire.org/wargames/bandit/bandit3.html)   
+    [How to reference filename with spaces in Linux](https://linuxhint.com/reference-filename-with-spaces-linux/)   
+    [Google Search for “spaces in filename”](https://www.google.com/search?q=spaces+in+filename)    
 
  
 

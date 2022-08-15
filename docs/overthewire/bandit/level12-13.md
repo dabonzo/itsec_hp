@@ -242,7 +242,7 @@ Password:                  | 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 
 ### Resources
 
-??? done "Resources"
+??? info "Resources"
 
     [Bandit-level13@overthewire](https://overthewire.org/wargames/bandit/bandit13.html)     
     [xxd manpage @linux.die.net](https://linux.die.net/man/1/xxd)       

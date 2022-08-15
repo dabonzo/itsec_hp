@@ -102,11 +102,13 @@ Password:                  | UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
 
 ### Resources
 
-[Bandit-level9@overthewire](https://overthewire.org/wargames/bandit/bandit9.html)       
-[file @linux.die.net](https://linux.die.net/man/1/file)     
-[strings @linux.die.net](https://linux.die.net/man/1/strings)       
-[wc @linux.die.net](https://linux.die.net/man/1/wc)     
-[grep @linux.die.net](https://linux.die.net/man/1/grep)     
+??? info "Resources"
+
+    [Bandit-level9@overthewire](https://overthewire.org/wargames/bandit/bandit9.html)       
+    [file @linux.die.net](https://linux.die.net/man/1/file)     
+    [strings @linux.die.net](https://linux.die.net/man/1/strings)       
+    [wc @linux.die.net](https://linux.die.net/man/1/wc)     
+    [grep @linux.die.net](https://linux.die.net/man/1/grep)     
 
 
 

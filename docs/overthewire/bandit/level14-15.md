@@ -97,7 +97,7 @@ Password:                  | 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
 
 ### Resources
 
-??? done "Resources"
+??? info "Resources"
 
     [Bandit-level15@overthewire](https://overthewire.org/wargames/bandit/bandit15.html)     
     [How to remove empty/blank lines from a file in Unix (including spaces) @serverfault.com?](https://serverfault.com/questions/252921/        how-to-remove-empty-blank-lines-from-a-file-in-unix-including-spaces)           

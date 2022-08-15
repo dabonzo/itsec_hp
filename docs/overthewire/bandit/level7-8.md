@@ -69,9 +69,10 @@ Password:                  | HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 
 ### Resources
 
-[Bandit-level8@overthewire](https://overthewire.org/wargames/bandit/bandit8.html)       
-[How To Use grep Command In Linux / UNIX With Practical Examples @cyberciti.biz](https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/)       
-[cut command in Linux with examples @geeksforgeeks.org](https://www.geeksforgeeks.org/cut-command-linux-examples/)      
+??? info "Resources"
+    [Bandit-level8@overthewire](https://overthewire.org/wargames/bandit/bandit8.html)       
+    [How To Use grep Command In Linux / UNIX With Practical Examples @cyberciti.biz](https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/)       
+    [cut command in Linux with examples @geeksforgeeks.org](https://www.geeksforgeeks.org/cut-command-linux-examples/)      
 
 
 

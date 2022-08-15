@@ -35,7 +35,9 @@ Password:                  | bandit0
 
 
 ### Resources
-[Bandit-level0@overthewire](https://overthewire.org/wargames/bandit/bandit0.html)    
-[Secure Shell (SSH) on Wikipedia](https://en.wikipedia.org/wiki/Secure_Shell)     
-[How to use SSH on wikiHow](https://www.wikihow.com/Use-SSH)    
-[ssh man page @linux.die.net](https://linux.die.net/man/1/ssh)
+
+??? info "Resources"
+    [Bandit-level0@overthewire](https://overthewire.org/wargames/bandit/bandit0.html)    
+    [Secure Shell (SSH) on Wikipedia](https://en.wikipedia.org/wiki/Secure_Shell)     
+    [How to use SSH on wikiHow](https://www.wikihow.com/Use-SSH)    
+    [ssh man page @linux.die.net](https://linux.die.net/man/1/ssh)

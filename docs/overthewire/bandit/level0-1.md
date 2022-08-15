@@ -65,9 +65,12 @@ Password:                  | bandit0
 
 
 ### Resources
-[Bandit-level1@overthewire](https://overthewire.org/wargames/bandit/bandit1.html)    
-[cat man page @ linux.die.net](https://linux.die.net/man/1/cat)    
-[ls man page @ linux.die.net](https://linux.die.net/man/1/ls)   
+
+??? info "Resources"
+
+    [Bandit-level1@overthewire](https://overthewire.org/wargames/bandit/bandit1.html)    
+    [cat man page @ linux.die.net](https://linux.die.net/man/1/cat)    
+    [ls man page @ linux.die.net](https://linux.die.net/man/1/ls)   
 
 
  
