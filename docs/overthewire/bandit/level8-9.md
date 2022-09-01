@@ -4,12 +4,12 @@
 The password for the next level is stored in the file **data.txt** and is the only line of text that occurs only once
 
 ### Current level credentials
-Key                        | Value
--------------------------: |----------------------------------------
-Server-name:               | bandit.labs.overthewire.org
-Port:                      | 2220
-User:                      | bandit8
-Password:                  | cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+|          Key | Value                            |
+| -----------: | -------------------------------- |
+| Server-name: | bandit.labs.overthewire.org      |
+|        Port: | 2220                             |
+|        User: | bandit8                          |
+|    Password: | cvX2JJa4CFALtqS87jk27qwqGhBM9plV |
 
 
 ### Current level login

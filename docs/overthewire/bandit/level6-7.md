@@ -8,12 +8,12 @@ The password for the next level is stored **somewhere on the server** and has al
 -   33 bytes in size
 
 ### Current level credentials
-Key                        | Value
--------------------------: |----------------------------------------
-Server-name:               | bandit.labs.overthewire.org
-Port:                      | 2220
-User:                      | bandit6
-Password:                  | DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+|          Key | Value                            |
+| -----------: | -------------------------------- |
+| Server-name: | bandit.labs.overthewire.org      |
+|        Port: | 2220                             |
+|        User: | bandit6                          |
+|    Password: | DXjZPULLxYr17uwoI01bNLQbtFemEgo7 |
 
 
 ### Current level login

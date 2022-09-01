@@ -1,26 +1,13 @@
-<!DOC{% extends "base.html" %}
-
-{% block content %}
-  {{ super() }}
-
-  <!-- Giscus -->
-  <h2 id="__comments">{{ lang.t("meta.comments") }}</h2>
-  <p>Any feedback and suggestions are welcome. This website was created using mkdocs and the material plugin. If you want, you can make a pull request. The repository is <a href="https://github.com/dabonzo/itsec_hp">https://github.com/dabonzo/itsec_hp</a></p>
-<script src="https://giscus.app/client.js"
-        data-repo="dabonzo/itsec_hp"
-        data-repo-id="R_kgDOH0fBLg"
-        data-category="General"
-        data-category-id="DIC_kwDOH0fBLs4CQ1Al"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        crossorigin="anonymous"
-        async>
-</script>
+<!DOC{% extends "base.html" %} {% block content %} {{ super() }} <!-- Giscus -->
+  <h3 id="__comments">{{ lang.t("meta.comments") }}</h2>
+  <p>Any feedback and suggestions are welcome. This website was created using mkdocs and the material plugin. If you
+    want, you can make a pull request. The repository is <a
+      href="https://github.com/dabonzo/itsec_hp">https://github.com/dabonzo/itsec_hp</a></p>
+  <script src="https://giscus.app/client.js" data-repo="dabonzo/itsec_hp" data-repo-id="R_kgDOH0fBLg"
+    data-category="General" data-category-id="DIC_kwDOH0fBLs4CQ1Al" data-mapping="pathname" data-strict="0"
+    data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme"
+    data-lang="en" crossorigin="anonymous" async>
+    </script>
 
   <!-- Synchronize Giscus theme with palette -->
   <script>
@@ -36,9 +23,9 @@
     }
 
     /* Register event handlers after documented loaded */
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       var ref = document.querySelector("[data-md-component=palette]")
-      ref.addEventListener("change", function() {
+      ref.addEventListener("change", function () {
         var palette = __md_get("__palette")
         if (palette && typeof palette.color === "object") {
           var theme = palette.color.scheme === "slate" ? "dark" : "light"
@@ -53,4 +40,5 @@
       })
     })
   </script>
-{% endblock %}
+  {% endblock %}
+  
