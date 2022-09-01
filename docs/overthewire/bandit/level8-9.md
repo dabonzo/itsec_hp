@@ -9,14 +9,14 @@ The password for the next level is stored in the file **data.txt** and is the on
 | Server-name: | bandit.labs.overthewire.org      |
 |        Port: | 2220                             |
 |        User: | bandit8                          |
-|    Password: | cvX2JJa4CFALtqS87jk27qwqGhBM9plV |
+|    Password: | TESKZC0XvTetK0S9xNwm25STk5iWrBvP |
 
 
 ### Current level login
 ??? note "Log in"
 
     ``` bash
-    sshpass -p cvX2JJa4CFALtqS87jk27qwqGhBM9plV ssh -p 2220 bandit8@bandit.labs.overthewire.org
+    sshpass -p TESKZC0XvTetK0S9xNwm25STk5iWrBvP ssh -p 2220 bandit8@bandit.labs.overthewire.org
     ```
     Note: You might need to install `sshpass` before using it. The `ssh` command can also be used on its own. If so, copy-paste the password when requested. 
 

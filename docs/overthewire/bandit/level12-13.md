@@ -9,14 +9,14 @@ Key                        | Value
 Server-name:               | bandit.labs.overthewire.org
 Port:                      | 2220
 User:                      | bandit12
-Password:                  | 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+Password:                  | JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
 
 
 ### Current level login
 ??? note "Log in"
 
     ``` bash
-    sshpass -p 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu ssh -p 2220 bandit12@bandit.labs.overthewire.org
+    sshpass -p JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv ssh -p 2220 bandit12@bandit.labs.overthewire.org
     ```
     Note: You might need to install `sshpass` before using it. The `ssh` command can also be used on its own. If so, copy-paste the password when requested. 
 

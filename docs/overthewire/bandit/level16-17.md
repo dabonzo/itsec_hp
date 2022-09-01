@@ -9,14 +9,14 @@ Key                        | Value
 Server-name:               | bandit.labs.overthewire.org
 Port:                      | 2220
 User:                      | 16
-Password:                  | cluFn7wTiGryunymYOu4RcffSxQluehd
+Password:                  | JQttfApK4SeyHwDlI9SXGR50qclOAil1
 
 
 ### Current level login
 ??? note "Log in"
 
     ``` bash
-    sshpass -p cluFn7wTiGryunymYOu4RcffSxQluehd ssh -p 2220 bandit16@bandit.labs.overthewire.org
+    sshpass -p JQttfApK4SeyHwDlI9SXGR50qclOAil1 ssh -p 2220 bandit16@bandit.labs.overthewire.org
     ```
     Note: You might need to install `sshpass` before using it. The `ssh` command can also be used on its own. If so, copy-paste the password when requested. 
 
@@ -182,7 +182,7 @@ Password:                  | cluFn7wTiGryunymYOu4RcffSxQluehd
     Failed to add the host to the list of known hosts (/home/bandit16/.ssh/known_hosts).  
     This is a OverTheWire game server. More information on http://www.overthewire.org/wargames  
     
-    xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn
+    VwOSWtCA7lRKkTfbr2IDh6awj9RNZM5e
     ```
 
     1. echo out the private key and redirect it to a file
