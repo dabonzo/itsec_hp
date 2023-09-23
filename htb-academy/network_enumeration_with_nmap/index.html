@@ -1,0 +1,3466 @@
+<!DOC
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://itsec.aria-network.com/htb-academy/network_enumeration_with_nmap/">
+      
+      
+        <link rel="prev" href="../javascript_deobfuscation/">
+      
+      
+        <link rel="next" href="../../thm/template/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
+    
+    
+      
+        <title>Network Enumeration with Nmap - ITSec</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.046329b4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#network-enumeration-with-nmap" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ITSec" class="md-header__button md-logo" aria-label="ITSec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ITSec
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Network Enumeration with Nmap
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../pentesting_basics/" class="md-tabs__link">
+          
+  
+  HTB Academy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../overthewire/bandit/level0/" class="md-tabs__link">
+          
+  
+  overthewire.org
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ctf-boxes/htb/easy/nibbles/nibbles/" class="md-tabs__link">
+          
+  
+  CTF
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tools/tmux/" class="md-tabs__link">
+          
+  
+  Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cheatsheets/cheatsheet_basic_linux_tools/" class="md-tabs__link">
+          
+  
+  Cheatsheets
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ITSec" class="md-nav__button md-logo" aria-label="ITSec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ITSec
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTB Academy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            HTB Academy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pentesting_basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pentesting Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web_requests/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web Requests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../javascript_deobfuscation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Javascript Deobfuscation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Network Enumeration with Nmap
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Network Enumeration with Nmap
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#host-enumeration-with-nmap" class="md-nav__link">
+    Host Enumeration with Nmap
+  </a>
+  
+    <nav class="md-nav" aria-label="Host Enumeration with Nmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#host-discovery" class="md-nav__link">
+    Host Discovery
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-host-scan" class="md-nav__link">
+    Single Host Scan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-ttl-for-different-hosts" class="md-nav__link">
+    Default TTL for different hosts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host-and-port-scanning" class="md-nav__link">
+    Host and Port Scanning
+  </a>
+  
+    <nav class="md-nav" aria-label="Host and Port Scanning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-states" class="md-nav__link">
+    Port States
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-port-discovery" class="md-nav__link">
+    TCP Port Discovery
+  </a>
+  
+    <nav class="md-nav" aria-label="TCP Port Discovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-states-deep-dive" class="md-nav__link">
+    Port States Deep-Dive
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#udp-port-discovery" class="md-nav__link">
+    UDP Port Discovery
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xml-output-to-html" class="md-nav__link">
+    XML Output to HTML
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-enumeration" class="md-nav__link">
+    Service Enumeration
+  </a>
+  
+    <nav class="md-nav" aria-label="Service Enumeration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-version-detection" class="md-nav__link">
+    Service Version Detection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nmap-scripting-engine-nse" class="md-nav__link">
+    Nmap Scripting Engine (NSE)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firewall-and-idsips-evasion" class="md-nav__link">
+    Firewall and IDS/IPS Evasion
+  </a>
+  
+    <nav class="md-nav" aria-label="Firewall and IDS/IPS Evasion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#firewalls" class="md-nav__link">
+    Firewalls
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idsips" class="md-nav__link">
+    IDS/IPS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#firewall-evasion" class="md-nav__link">
+    Firewall evasion
+  </a>
+  
+    <nav class="md-nav" aria-label="Firewall evasion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scan-by-using-decoys" class="md-nav__link">
+    Scan by Using Decoys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scan-by-using-different-source-ip" class="md-nav__link">
+    Scan by Using Different Source IP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-proxying" class="md-nav__link">
+    DNS Proxying
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thm/template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    overthewire.org
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            overthewire.org
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Bandit
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Bandit
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Level 0-10
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Level 0-10
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level0-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 0-1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level1-2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 1-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level2-3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 2-3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level3-4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 3-4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level4-5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 4-5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level5-6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 5-6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level6-7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 6-7
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level7-8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 7-8
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level8-9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 8-9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level9-10/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 9-10
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_2" >
+        
+          <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Level 11-20
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Level 11-20
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level10-11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 10-11
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level11-12/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 11-12
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level12-13/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 12-13
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level13-14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 13-14
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level14-15/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 14-15
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level15-16/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 15-16
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level16-17/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 16-17
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level17-18.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 17-18
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level18-19.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 18-19
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level19-20.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 19-20
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+        
+          <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Level 21-30
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Level 21-30
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level20-21.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 20-21
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level21-22.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 21-22
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level22-23.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 22-23
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level23-24.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 23-24
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level24-25.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 24-25
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level25-26.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 25-26
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level26-27.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 26-27
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level27-28.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 27-28
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level28-29.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 28-29
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level29-30.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 29-30
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_4" >
+        
+          <label class="md-nav__link" for="__nav_3_1_4" id="__nav_3_1_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Level 31-33
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            Level 31-33
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level30-31.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 30-31
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level31-32.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 31-32
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/bandit/level32-33.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 32-33
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Natas
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Natas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overthewire/natas/levoel1-2.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Level 1-2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    CTF
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            CTF
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    HTB
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            HTB
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_1" >
+        
+          <label class="md-nav__link" for="__nav_4_1_1" id="__nav_4_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Easy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Easy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ctf-boxes/htb/easy/nibbles/nibbles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nibbles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vulnhub
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vulnhub
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+        
+          <label class="md-nav__link" for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Easy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Easy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ctf-boxes/vulnhub/easy/jangow/jangow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jangow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    THM
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            THM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_1" >
+        
+          <label class="md-nav__link" for="__nav_4_3_1" id="__nav_4_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Easy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Easy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ctf-boxes/thm/easy/easypeasy/easypeasy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EasyPeasy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/tmux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/ffuf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ffuf
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Cheatsheets
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Cheatsheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cheatsheets/cheatsheet_basic_linux_tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Linux Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cheatsheets/cheatsheet_basic_pentesting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Pentesting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cheatsheets/cheatsheet_curl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    curl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cheatsheets/cheatsheet_nmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#host-enumeration-with-nmap" class="md-nav__link">
+    Host Enumeration with Nmap
+  </a>
+  
+    <nav class="md-nav" aria-label="Host Enumeration with Nmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#host-discovery" class="md-nav__link">
+    Host Discovery
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-host-scan" class="md-nav__link">
+    Single Host Scan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-ttl-for-different-hosts" class="md-nav__link">
+    Default TTL for different hosts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host-and-port-scanning" class="md-nav__link">
+    Host and Port Scanning
+  </a>
+  
+    <nav class="md-nav" aria-label="Host and Port Scanning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-states" class="md-nav__link">
+    Port States
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-port-discovery" class="md-nav__link">
+    TCP Port Discovery
+  </a>
+  
+    <nav class="md-nav" aria-label="TCP Port Discovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-states-deep-dive" class="md-nav__link">
+    Port States Deep-Dive
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#udp-port-discovery" class="md-nav__link">
+    UDP Port Discovery
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xml-output-to-html" class="md-nav__link">
+    XML Output to HTML
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-enumeration" class="md-nav__link">
+    Service Enumeration
+  </a>
+  
+    <nav class="md-nav" aria-label="Service Enumeration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-version-detection" class="md-nav__link">
+    Service Version Detection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nmap-scripting-engine-nse" class="md-nav__link">
+    Nmap Scripting Engine (NSE)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firewall-and-idsips-evasion" class="md-nav__link">
+    Firewall and IDS/IPS Evasion
+  </a>
+  
+    <nav class="md-nav" aria-label="Firewall and IDS/IPS Evasion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#firewalls" class="md-nav__link">
+    Firewalls
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idsips" class="md-nav__link">
+    IDS/IPS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#firewall-evasion" class="md-nav__link">
+    Firewall evasion
+  </a>
+  
+    <nav class="md-nav" aria-label="Firewall evasion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scan-by-using-decoys" class="md-nav__link">
+    Scan by Using Decoys
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scan-by-using-different-source-ip" class="md-nav__link">
+    Scan by Using Different Source IP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-proxying" class="md-nav__link">
+    DNS Proxying
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                 
+                  
+
+
+<h1 id="network-enumeration-with-nmap">Network Enumeration with Nmap</h1>
+<p><a href="https://en.wikipedia.org/wiki/Nmap">Nmap</a> is used to discover hosts and services on a computer network  by sending packets and analyzing the responses. Nmap provides a number of features for probing computer networks,  including host discovery and service and operating system detection. Besides other features, Nmap also offers scanning capabilities that can  determine if packet filters, firewalls, or intrusion detection systems  (IDS) are configured as needed.</p>
+<h2 id="host-enumeration-with-nmap">Host Enumeration with Nmap</h2>
+<h3 id="host-discovery">Host Discovery</h3>
+<p>The first step should be getting an overwiew over all the system that are online and that we can work with.
+This step may not be needed if we are given an IP to check it out. A typical host discovery scan looks like:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>bonzo@srv001:/opt/share&gt; nmap 192.168.0.0/24 -sn -oA tnet | grep for | cut -d&quot; &quot; -f5
+192.168.0.1
+192.168.0.2
+192.168.0.4
+192.168.0.5
+192.168.0.6
+192.168.0.7
+192.168.0.8
+192.168.0.9
+</code></pre></div></td></tr></table></div>
+<p>The nmap options used are:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.0.0/24</td>
+<td>The network in <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">CIDR</a> format</td>
+</tr>
+<tr>
+<td>-sn</td>
+<td>-sn: Ping Scan - disables port scan</td>
+</tr>
+<tr>
+<td>-oA</td>
+<td>-oA \&lt;filename&gt;: Output in the three major formats at once. Nmap has 5 output formats. The 3 major output formats are <code>normal</code>, <code>XML</code> and <code>grepable</code></td>
+</tr>
+<tr>
+<td>tnet</td>
+<td>belongs to -oA and is the name of the files, without extension, -oA outputs (<code>tnet.nmap</code> for the normal output, <code>tnet.gnmap</code> for the grepable output and <code>tnet.xml</code> for the XML output)</td>
+</tr>
+</tbody>
+</table>
+<p>Sometimes we get a list with predefined hosts to check. This is a simple list with an IP on each row. </p>
+<p>For example, if we have a list with 3 IP's:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>192.168.0.1
+192.168.0.2
+192.168.0.3
+</code></pre></div></td></tr></table></div>
+<p>We can use this list to scan only the hosts with that IP.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="gp">Bonzo@htb[/htb]$ </span>sudo<span class="w"> </span>nmap<span class="w"> </span>-sn<span class="w"> </span>-oA<span class="w"> </span>tnet<span class="w"> </span>-iL<span class="w"> </span>hosts.lst<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s2">&quot; &quot;</span><span class="w"> </span>-f5
+<span class="go">192.168.0.1</span>
+<span class="go">192.168.0.2</span>
+<span class="go">192.168.0.3</span>
+</code></pre></div></td></tr></table></div>
+<p>We can define more IP's on the command line.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>Bonzo@htb[/htb]$ sudo nmap -sn -oA tnet 192.168.0.1 192.168.0.2 192.168.03 | grep for | cut -d&quot; &quot; -f5
+192.168.0.1
+192.168.0.2
+192.168.0.3
+</code></pre></div></td></tr></table></div>
+<p>We can also define ranges of IP's</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code>Bonzo@htb[/htb]$ sudo nmap -sn -oA tnet 192.168.0.1-3 | grep for | cut -d&quot; &quot; -f5
+192.168.0.1
+192.168.0.2
+192.168.0.3
+</code></pre></div></td></tr></table></div>
+<h3 id="single-host-scan">Single Host Scan</h3>
+<p>If we look at a single host scan like:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nmap 192.168.0.100 -sn -oA host
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-09-25 00:06 CEST
+Nmap scan report for kalirp (192.168.0.100)
+Host is up (0.00013s latency).
+MAC Address: DC:A6:32:38:B1:22 (Raspberry Pi Trading)
+Nmap done: 1 IP address (1 host up) scanned in 0.09 seconds
+</code></pre></div></td></tr></table></div>
+<p>We assume the discovery is with a <code>PING SCAN</code>. But if we add the <code>--packet-trace</code> option we can see that it was actually an <code>ARP PING</code> scan.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nmap 192.168.0.100 -sn -oA host -PE --packet-trace
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-09-25 00:08 CEST
+SENT (0.0478s) ARP who-has 192.168.0.100 tell 192.168.0.10
+RCVD (0.0479s) ARP reply 192.168.0.100 is-at DC:A6:32:38:B1:22
+Nmap scan report for kalirp (192.168.0.100)
+Host is up (0.00012s latency).
+MAC Address: DC:A6:32:38:B1:22 (Raspberry Pi Trading)
+Nmap done: 1 IP address (1 host up) scanned in 0.10 seconds
+</code></pre></div></td></tr></table></div>
+<p>If we want to know why the host was classiefied as up we can use the <code>--reason</code> option</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nmap 192.168.0.100 -sn -oA host -PE --reason
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-09-25 00:10 CEST
+Nmap scan report for kalirp (192.168.0.100)
+Host is up, received arp-response (0.000097s latency).
+MAC Address: DC:A6:32:38:B1:22 (Raspberry Pi Trading)
+Nmap done: 1 IP address (1 host up) scanned in 0.10 seconds
+</code></pre></div></td></tr></table></div>
+<p>If we want to disable the <code>ARP PING</code> and specifically use <code>ICMP PING</code>, we can do thath with the option <code>--disable-arp-ping</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nmap 192.168.0.100 -sn -oA host -PE --packet-trace --disable-arp-ping
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-09-25 00:12 CEST
+SENT (0.0675s) ICMP [192.168.0.10 &gt; 192.168.0.100 Echo request (type=8/code=0) id=62396 seq=0] IP [ttl=42 id=59438 iplen=28 ]
+RCVD (0.0676s) ICMP [192.168.0.100 &gt; 192.168.0.10 Echo reply (type=0/code=0) id=62396 seq=0] IP [ttl=64 id=58669 iplen=28 ]
+Nmap scan report for kalirp (192.168.0.100)
+Host is up (0.00014s latency).
+MAC Address: DC:A6:32:38:B1:22 (Raspberry Pi Trading)
+Nmap done: 1 IP address (1 host up) scanned in 0.13 seconds
+</code></pre></div></td></tr></table></div>
+<p>Network scanning strategies can b e found here: <a href="https://nmap.org/book/host-discovery-strategies.html">https://nmap.org/book/host-discovery-strategies.html</a></p>
+<h3 id="default-ttl-for-different-hosts">Default TTL for different hosts</h3>
+<p>At last, we can try to figure out what OS (roughly) is running on the last scanned host only by TTL. We can se that the TTL is 64 and searching the internet for "Default TTL OS" we can see that it has to be a Linux system.</p>
+<table>
+<thead>
+<tr>
+<th>TTL</th>
+<th>OS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>64</td>
+<td>*nix (Linux/Unix)</td>
+</tr>
+<tr>
+<td>128</td>
+<td>Windows</td>
+</tr>
+<tr>
+<td>256</td>
+<td>Solaris/AIX</td>
+</tr>
+</tbody>
+</table>
+<p>More TTL values can be found here: <a href="https://subinsb.com/default-device-ttl-values/">https://subinsb.com/default-device-ttl-values/</a></p>
+<h2 id="host-and-port-scanning">Host and Port Scanning</h2>
+<p>After the initial host discovery, we want to find out the services that run on the host. Therefore we scan for ports, service versions on discovered ports, maybe some information those services provide and te OS version if possible.</p>
+<h3 id="port-states">Port States</h3>
+<table>
+<thead>
+<tr>
+<th><strong>State</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>open</code></td>
+<td>This indicates that the connection to the scanned port has been established. These connections can be <strong>TCP connections</strong>, <strong>UDP datagrams</strong> as well as <strong>SCTP associations</strong>.</td>
+</tr>
+<tr>
+<td><code>closed</code></td>
+<td>When the port is shown as closed, the TCP protocol indicates that the packet we received back contains an <code>RST</code> flag. This scanning method can also be used to determine if our target is alive or not.</td>
+</tr>
+<tr>
+<td><code>filtered</code></td>
+<td>Nmap cannot correctly identify whether the scanned port is open or  closed because either no response is returned from the target for the  port or we get an error code from the target.</td>
+</tr>
+<tr>
+<td><code>unfiltered</code></td>
+<td>This state of a port only occurs during the <strong>TCP-ACK</strong> scan and means that the port is accessible, but it cannot be determined whether it is open or closed.</td>
+</tr>
+<tr>
+<td><code>open|filtered</code></td>
+<td>If we do not get a response for a specific port, <code>Nmap</code> will set it to that state. This indicates that a firewall or packet filter may protect the port.</td>
+</tr>
+<tr>
+<td><code>closed|filtered</code></td>
+<td>This state only occurs in the <strong>IP ID idle</strong> scans and indicates that it was impossible to determine if the scanned port is closed or filtered by a firewall.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tcp-port-discovery">TCP Port Discovery</h3>
+<p>By default, <code>Nmap</code> scans the top 1000 TCP ports with the <code>SYN scan</code> (-sS). The <code>SYN</code> scan is set to default if we run nmap as a privileged uses (<code>root</code>). Otherwise a <code>TCP Scan</code> (-sT) is performed as default. </p>
+<p>There are different options to define the ports to scan</p>
+<table>
+<thead>
+<tr>
+<th>Ports</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-p-</td>
+<td>Scan all ports (65535 ports, a 16 bit unsigned number)</td>
+</tr>
+<tr>
+<td>-p 53</td>
+<td>Scan port 53</td>
+</tr>
+<tr>
+<td>-p 53,80,443</td>
+<td>Scan ports 53, 80 ,443</td>
+</tr>
+<tr>
+<td>-p 53-100</td>
+<td>Scan port range from port 53 up to port 100</td>
+</tr>
+<tr>
+<td>--top-ports=10</td>
+<td>Scan the top 10 ports. Top ports is nmaps own list of ports that are usually open. The maker of nmap scanned he scanned most of the Internet and determined which ports are <em>usually</em> open, and he built lists of the top ports for use within <code>nmap</code>. <a href="https://danielmiessler.com/blog/nmap-use-the-top-ports-option-for-both-tcp-and-udp-simultaneously/">https://danielmiessler.com/blog/nmap-use-the-top-ports-option-for-both-tcp-and-udp-simultaneously/</a>. --top-ports usually scans only <code>TCP</code> ports. To scan <code>UDP</code> as well, use <code>nmap -sTU --top-ports</code>. An basic scan would be <code>nmap -vv -O -P0 -sTUV –top-ports 1000 -oA target $target</code></td>
+</tr>
+<tr>
+<td>-F</td>
+<td>Fast port scan (top 100 ports)</td>
+</tr>
+</tbody>
+</table>
+<h5 id="port-states-deep-dive">Port States Deep-Dive</h5>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nmap 10.129.222.195 --top-ports=10 
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-09-25 11:23 CEST
+Nmap scan report for 10.129.222.195
+Host is up (0.038s latency).
+
+PORT     STATE    SERVICE
+21/tcp   closed   ftp
+22/tcp   open     ssh
+23/tcp   closed   telnet
+25/tcp   open     smtp
+80/tcp   open     http
+110/tcp  open     pop3
+139/tcp  filtered netbios-ssn
+443/tcp  closed   https
+445/tcp  filtered microsoft-ds
+3389/tcp closed   ms-wbt-server
+
+Nmap done: 1 IP address (1 host up) scanned in 0.22 seconds
+</code></pre></div></td></tr></table></div>
+<p>Let's take a look why some states are closes or filtered. Let's take port 21/ftp. Also, let's clear some things for a better view.
+We are going to use <code>--packet-trace</code>, disable <code>TCP ping</code> and <code>ARP ping</code> (<code>-Pn</code> and <code>--disable-arp-ping</code>) and disable DNS resolution <code>-n</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nmap 10.129.37.146 -p 21 --packet-trace -Pn -n --disable-arp-ping --reason
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-09-25 12:24 CEST
+SENT (0.0759s) TCP 10.10.15.152:47521 &gt; 10.129.37.146:21 S ttl=40 id=32078 iplen=44  seq=1160986713 win=1024 &lt;mss 1460&gt;
+RCVD (0.1159s) TCP 10.129.37.146:21 &gt; 10.10.15.152:47521 RA ttl=63 id=59050 iplen=40  seq=0 win=0 
+Nmap scan report for 10.129.37.146
+Host is up, received user-set (0.040s latency).
+
+PORT   STATE  SERVICE REASON
+21/tcp closed ftp     reset ttl 63
+
+Nmap done: 1 IP address (1 host up) scanned in 0.18 seconds
+</code></pre></div></td></tr></table></div>
+<p>As we can see, a <code>SYN</code> request is sent and the server answers with <code>ACK, RST</code>. That means, for some reason, the service does not want to accept the packet. It acknowledges the packet but it drops it with a reset. </p>
+<p>Let's check the port 139, a filtered port</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nmap 10.129.37.146 -p 139 --packet-trace -Pn -n --disable-arp-ping --reason
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-09-25 12:36 CEST
+SENT (0.0620s) TCP 10.10.15.152:36362 &gt; 10.129.37.146:139 S ttl=41 id=57032 iplen=44  seq=2129173419 win=1024 &lt;mss 1460&gt;
+RCVD (1.1010s) TCP 10.129.37.146:139 &gt; 10.10.15.152:36362 S ttl=63 id=0 iplen=44  seq=229234553 win=29200 &lt;mss 1357&gt;
+Nmap scan report for 10.129.37.146
+Host is up, received user-set (0.039s latency).
+
+PORT    STATE SERVICE     REASON
+139/tcp filtered  netbios-ssn syn ttl 63
+
+Nmap done: 1 IP address (1 host up) scanned in 0.14 seconds
+</code></pre></div></td></tr></table></div>
+<p>We can see that 2 packets were sent. The first one took only 0.06 s but the second one took a whole second. That speaks for a dropped packet. If the time were similar and the server returns a failed ICMP response (type 3, code 3), the firewall is rejecting the packet. If we know for sure the host is up, that means this port is somehow accesible and we need to investigate it further. </p>
+<h3 id="udp-port-discovery">UDP Port Discovery</h3>
+<p>Since <code>UDP</code> is a stateless protocol, we don't get any acknowledgment. Therefore <code>UDP</code> scans take a lot longer than <code>TCP</code> scans. A typical <code>UDP</code> scan looks like this (we use <code>-F</code> for the top 100 ports): </p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nmap 10.129.37.146 -sU -F
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-09-25 13:00 CEST
+Nmap scan report for 10.129.37.146
+Host is up (0.039s latency).
+Not shown: 97 closed udp ports (port-unreach)
+PORT    STATE         SERVICE
+68/udp  open|filtered dhcpc
+137/udp open          netbios-ns
+138/udp open|filtered netbios-dgm
+
+Nmap done: 1 IP address (1 host up) scanned in 112.46 seconds
+</code></pre></div></td></tr></table></div>
+<h3 id="xml-output-to-html">XML Output to HTML</h3>
+<p>XML output can be easily converted to HTML wit the tool <code>xsltproc</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>Bonzo@htb[/htb]$ xsltproc target.xml -o target.html
+</code></pre></div></td></tr></table></div>
+<p>More about output formats: <a href="https://nmap.org/book/output.html">https://nmap.org/book/output.html</a></p>
+<h2 id="service-enumeration">Service Enumeration</h2>
+<p>After we discover all ports, it is important to find out as much as possible about this ports. It is essential to determine the application and version. With an exact version we can search for publicly available exploits or weaknesses.</p>
+<h3 id="service-version-detection">Service Version Detection</h3>
+<p>We add the <code>-sV</code> option to scan for applications and their versions.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nmap 10.129.239.85 -p- -sV
+Starting Nmap 7.92 ( https://nmap.org ) at 2021-09-25 17:25 CEST
+Nmap scan report for 10.129.239.85
+Host is up (0.037s latency).
+Not shown: 65528 closed tcp ports (reset)
+PORT      STATE SERVICE     VERSION
+22/tcp    open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.10 (Ubuntu Linux; protocol 2.0)
+80/tcp    open  http        Apache httpd 2.4.18 ((Ubuntu))
+110/tcp   open  pop3        Dovecot pop3d
+139/tcp   open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+143/tcp   open  imap        Dovecot imapd
+445/tcp   open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+31337/tcp open  Elite?
+Service Info: Host: NIX-NMAP-DEFAULT; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 174.06 seconds
+</code></pre></div></td></tr></table></div>
+<p>Scans can take a long time. We can press <span class="keys"><kbd class="key-space">Space</kbd></span> to let nmap show us the current status or we can use the parameter <code>--stats-every=5s</code>. The time can be set as you wish, in seconds <code>s</code> or minutes <code>s</code>.  We can use the <code>-v</code> or <code>-vv</code> option to get the scan be more verbose and to show us detected ports as they are discovered. Sometimes <code>nmap</code> misses the version and we can try to get it manually via <code>nc</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>srv001:/opt/share # nc -nv 10.129.239.85 22
+Connection to 10.129.239.85 22 port [tcp/*] succeeded!
+SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.10
+</code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Give <code>nc</code> some time to finish the screen grabbing, it can tak a while to get a result</p>
+</div>
+<h2 id="nmap-scripting-engine-nse">Nmap Scripting Engine (NSE)</h2>
+<p><code>NSE</code> allows users to write (and share) simple scripts (using the <a href="http://lua.org">Lua programming language</a>) to automate a wide variety of networking tasks.</p>
+<p>There are 14 categories in wich the scripts are divided.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Category</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auth</code></td>
+<td>Determination of authentication credentials.</td>
+</tr>
+<tr>
+<td><code>broadcast</code></td>
+<td>Scripts, which are used for host discovery by broadcasting and the  discovered hosts, can be automatically added to the remaining scans.</td>
+</tr>
+<tr>
+<td><code>brute</code></td>
+<td>Executes scripts that try to log in to the respective service by brute-forcing with credentials.</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>Default scripts executed by using the <code>-sC</code> option.</td>
+</tr>
+<tr>
+<td><code>discovery</code></td>
+<td>Evaluation of accessible services.</td>
+</tr>
+<tr>
+<td><code>dos</code></td>
+<td>These scripts are used to check services for denial of service vulnerabilities and are used less as it harms the services.</td>
+</tr>
+<tr>
+<td><code>exploit</code></td>
+<td>This category of scripts tries to exploit known vulnerabilities for the scanned port.</td>
+</tr>
+<tr>
+<td><code>external</code></td>
+<td>Scripts that use external services for further processing.</td>
+</tr>
+<tr>
+<td><code>fuzzer</code></td>
+<td>This uses scripts to identify vulnerabilities and unexpected packet  handling by sending different fields, which can take much time.</td>
+</tr>
+<tr>
+<td><code>intrusive</code></td>
+<td>Intrusive scripts that could negatively affect the target system.</td>
+</tr>
+<tr>
+<td><code>malware</code></td>
+<td>Checks if some malware infects the target system.</td>
+</tr>
+<tr>
+<td><code>safe</code></td>
+<td>Defensive scripts that do not perform intrusive and destructive access.</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Extension for service detection.</td>
+</tr>
+<tr>
+<td><code>vuln</code></td>
+<td>Identification of specific vulnerabilities.</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>default</code> category is executed bey default using the <code>-sC</code> option. </p>
+<p>You can specify script categories or specific scripts with <code>--script &lt;category&gt;</code> or <code>--script &lt;scrip&gt;,&lt;script&gt;,...</code>
+You can scan for vulnerabilities with the category <code>vuln</code> .</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="gp">Bonzo@htb[/htb]$ </span>sudo<span class="w"> </span>nmap<span class="w"> </span><span class="m">10</span>.129.2.28<span class="w"> </span>-p<span class="w"> </span><span class="m">80</span><span class="w"> </span>-sV<span class="w"> </span>--script<span class="w"> </span>vuln<span class="w"> </span>
+
+<span class="go">Nmap scan report for 10.129.2.28</span>
+<span class="go">Host is up (0.036s latency).</span>
+
+<span class="go">PORT   STATE SERVICE VERSION</span>
+<span class="go">80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))</span>
+<span class="go">| http-enum:</span>
+<span class="go">|   /wp-login.php: Possible admin folder</span>
+<span class="go">|   /readme.html: Wordpress version: 2</span>
+<span class="go">|   /: WordPress version: 5.3.4</span>
+<span class="go">|   /wp-includes/images/rss.png: Wordpress version 2.2 found.</span>
+<span class="go">|   /wp-includes/js/jquery/suggest.js: Wordpress version 2.5 found.</span>
+<span class="go">|   /wp-includes/images/blank.gif: Wordpress version 2.6 found.</span>
+<span class="go">|   /wp-includes/js/comment-reply.js: Wordpress version 2.7 found.</span>
+<span class="go">|   /wp-login.php: Wordpress login page.</span>
+<span class="go">|   /wp-admin/upgrade.php: Wordpress login page.</span>
+<span class="go">|_  /readme.html: Interesting, a readme.</span>
+<span class="go">|_http-server-header: Apache/2.4.29 (Ubuntu)</span>
+<span class="go">|_http-stored-xss: Couldn&#39;t find any stored XSS vulnerabilities.</span>
+<span class="go">| http-wordpress-users:</span>
+<span class="go">| Username found: admin</span>
+<span class="go">|_Search stopped at ID #25. Increase the upper limit if necessary with &#39;http-wordpress-users.limit&#39;</span>
+<span class="go">| vulners:</span>
+<span class="go">|   cpe:/a:apache:http_server:2.4.29:</span>
+<span class="go">|       CVE-2019-0211   7.2 https://vulners.com/cve/CVE-2019-0211</span>
+<span class="go">|       CVE-2018-1312   6.8 https://vulners.com/cve/CVE-2018-1312</span>
+<span class="go">|       CVE-2017-15715  6.8 https://vulners.com/cve/CVE-2017-15715</span>
+<span class="go">&lt;SNIP&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="performance">Performance</h2>
+<p>Scanning performance plays a significant role when we need to scan an  extensive network or are dealing with low network bandwidth. We can use  various options to tell <code>Nmap</code> how fast (<code>-T &lt;1-5&gt;</code>), with which frequency (<code>--min-parallelism &lt;number&gt;</code>), which timeouts (<code>--max-rtt-timeout &lt;time&gt;</code>) the test packets should have, how many packets should be sent simultaneously (<code>--min-rate &lt;number&gt;</code>), and with the number of retries (<code>--max-retries &lt;number&gt;</code>) for the scanned ports the targets should be scanned.</p>
+<p>To make things easier, we can use templates with predifined options. We use the templated with <code>-T &lt;number&gt;</code>.
+Here are the options used for each template. By default, all nmap scans run on <code>–T3</code> timing template. </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>T0</th>
+<th>T1</th>
+<th>T2</th>
+<th>T3</th>
+<th>T4</th>
+<th>T5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Paranoid</td>
+<td>Sneaky</td>
+<td>Polite</td>
+<td>Normal</td>
+<td>Aggressive</td>
+<td>Insane</td>
+</tr>
+<tr>
+<td><code>min-rtt-timeout</code></td>
+<td>100</td>
+<td>100</td>
+<td>100</td>
+<td>100</td>
+<td>100</td>
+<td>50</td>
+</tr>
+<tr>
+<td><code>max-rtt-timeout</code></td>
+<td>300,000</td>
+<td>15,000</td>
+<td>10,000</td>
+<td>10,000</td>
+<td>1,250</td>
+<td>300</td>
+</tr>
+<tr>
+<td><code>initial-rtt-timeout</code></td>
+<td>300,000</td>
+<td>15,000</td>
+<td>1,000</td>
+<td>1,000</td>
+<td>500</td>
+<td>250</td>
+</tr>
+<tr>
+<td><code>max-retries</code></td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>6</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Initial (and minimum) scan delay (<code>--scan-delay</code>)</td>
+<td>300,000</td>
+<td>15,000</td>
+<td>400</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Maximum TCP scan delay</td>
+<td>300,000</td>
+<td>15,000</td>
+<td>1,000</td>
+<td>1,000</td>
+<td>10</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Maximum UDP scan delay</td>
+<td>300,000</td>
+<td>15,000</td>
+<td>1,000</td>
+<td>1,000</td>
+<td>1,000</td>
+<td>1,000</td>
+</tr>
+<tr>
+<td><code>host-timeout</code></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>900,000</td>
+</tr>
+<tr>
+<td><code>min-parallelism</code></td>
+<td>Dynamic, not affected by timing templates</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>max-parallelism</code></td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Dynamic</td>
+<td>Dynamic</td>
+<td>Dynamic</td>
+</tr>
+<tr>
+<td><code>min-hostgroup</code></td>
+<td>Dynamic, not affected by timing templates</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>max-hostgroup</code></td>
+<td>Dynamic, not affected by timing templates</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>min-rate</code></td>
+<td>No minimum rate limit</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>max-rate</code></td>
+<td>No maximum rate limit</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>defeat-rst-ratelimit</code></td>
+<td>Not enabled by default</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="firewall-and-idsips-evasion">Firewall and IDS/IPS Evasion</h2>
+<p>Nmap uses fragmentation of packets, the use of decoys, and others to evade IDS/IPS.</p>
+<h3 id="firewalls">Firewalls</h3>
+<p>A firewall is a security measure against unauthorized connection  attempts from external networks. Every firewall security system is based on a software component that monitors network traffic between the  firewall and incoming data connections and decides how to handle the  connection based on the rules that have been set. It checks whether  individual network packets are being passed, ignored, or blocked. This  mechanism is designed to prevent unwanted connections that could be  potentially dangerous.</p>
+<hr />
+<h3 id="idsips">IDS/IPS</h3>
+<p>Like the firewall, the intrusion detection system (<code>IDS</code>) and intrusion prevention system (<code>IPS</code>) are also software-based components. <code>IDS</code> scans the network for potential attacks, analyzes them, and reports any detected attacks. <code>IPS</code> complements <code>IDS</code> by taking specific defensive measures if a potential attack should have been detected. The analysis of such attacks is based on pattern  matching and signatures. If specific patterns are detected, such as a  service detection scan, <code>IPS</code> may prevent the pending connection attempts.</p>
+<h3 id="firewall-evasion">Firewall evasion</h3>
+<p>If a firewall blocks our scans, we can try <code>ACK</code> or <code>Connected</code> scan (<code>-sA</code> and <code>-sT</code>). It's much harder for a firewall or IDS/IPS.</p>
+<h4 id="scan-by-using-decoys">Scan by Using Decoys</h4>
+<p>There are cases in which administrators block specific subnets from  different regions in principle. This prevents any access to the target  network. Another example is when IPS should block us. For this reason,  the Decoy scanning method (<code>-D</code>) is the right choice. With  this method, Nmap generates various random IP addresses inserted into  the IP header to disguise the origin of the packet sent. With this method, we can generate random (<code>RND</code>) a specific number (for example: <code>5</code>) of IP addresses separated by a colon (<code>:</code>). </p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="gp">Bonzo@htb[/htb]$ </span>sudo<span class="w"> </span>nmap<span class="w"> </span><span class="m">10</span>.129.2.28<span class="w"> </span>-p<span class="w"> </span><span class="m">80</span><span class="w"> </span>-sS<span class="w"> </span>-Pn<span class="w"> </span>-n<span class="w"> </span>--disable-arp-ping<span class="w"> </span>--packet-trace<span class="w"> </span>-D<span class="w"> </span>RND:5
+
+<span class="go">Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-21 16:14 CEST</span>
+<span class="go">SENT (0.0378s) TCP 102.52.161.59:59289 &gt; 10.129.2.28:80 S ttl=42 id=29822 iplen=44  seq=3687542010 win=1024 &lt;mss 1460&gt;</span>
+<span class="go">SENT (0.0378s) TCP 10.10.14.2:59289 &gt; 10.129.2.28:80 S ttl=59 id=29822 iplen=44  seq=3687542010 win=1024 &lt;mss 1460&gt;</span>
+<span class="go">SENT (0.0379s) TCP 210.120.38.29:59289 &gt; 10.129.2.28:80 S ttl=37 id=29822 iplen=44  seq=3687542010 win=1024 &lt;mss 1460&gt;</span>
+<span class="go">SENT (0.0379s) TCP 191.6.64.171:59289 &gt; 10.129.2.28:80 S ttl=38 id=29822 iplen=44  seq=3687542010 win=1024 &lt;mss 1460&gt;</span>
+<span class="go">SENT (0.0379s) TCP 184.178.194.209:59289 &gt; 10.129.2.28:80 S ttl=39 id=29822 iplen=44  seq=3687542010 win=1024 &lt;mss 1460&gt;</span>
+<span class="go">SENT (0.0379s) TCP 43.21.121.33:59289 &gt; 10.129.2.28:80 S ttl=55 id=29822 iplen=44  seq=3687542010 win=1024 &lt;mss 1460&gt;</span>
+<span class="go">RCVD (0.1370s) TCP 10.129.2.28:80 &gt; 10.10.14.2:59289 SA ttl=64 id=0 iplen=44  seq=4056111701 win=64240 &lt;mss 1460&gt;</span>
+<span class="go">Nmap scan report for 10.129.2.28</span>
+<span class="go">Host is up (0.099s latency).</span>
+
+<span class="go">PORT   STATE SERVICE</span>
+<span class="go">80/tcp open  http</span>
+<span class="go">MAC Address: DE:AD:00:00:BE:EF (Intel Corporate)</span>
+
+<span class="go">Nmap done: 1 IP address (1 host up) scanned in 0.15 seconds</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="scan-by-using-different-source-ip">Scan by Using Different Source IP</h3>
+<p>We add the source IP with the option <code>-S</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code>Bonzo@htb[/htb]$ sudo nmap 10.129.2.28 -n -Pn -p 445 -O -S 10.129.2.200 -e tun0
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-22 01:16 CEST
+Nmap scan report for 10.129.2.28
+Host is up (0.010s latency).
+
+PORT    STATE SERVICE
+445/tcp open  microsoft-ds
+MAC Address: DE:AD:00:00:BE:EF (Intel Corporate)
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: Linux 2.6.32 (96%), Linux 3.2 - 4.9 (96%), Linux 2.6.32 - 3.10 (96%), Linux 3.4 - 3.10 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (94%), Synology DiskStation Manager 5.2-5644 (94%), Linux 2.6.32 - 2.6.35 (94%), Linux 2.6.32 - 3.5 (94%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 1 hop
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 4.11 seconds
+</code></pre></div></td></tr></table></div>
+<h3 id="dns-proxying">DNS Proxying</h3>
+<p>We can use the DNS server port (53) to scan from this port. The reason to do that is that this port is often not blocked and we can do a scan on the internal network if the source port is port 53</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code>Bonzo@htb[/htb]$ sudo nmap 10.129.2.28 -p50000 -sS -Pn -n --disable-arp-ping --packet-trace --source-port 53
+
+SENT (0.0482s) TCP 10.10.14.2:53 &gt; 10.129.2.28:50000 S ttl=58 id=27470 iplen=44  seq=4003923435 win=1024 &lt;mss 1460&gt;
+RCVD (0.0608s) TCP 10.129.2.28:50000 &gt; 10.10.14.2:53 SA ttl=64 id=0 iplen=44  seq=540635485 win=64240 &lt;mss 1460&gt;
+Nmap scan report for 10.129.2.28
+Host is up (0.013s latency).
+
+PORT      STATE SERVICE
+50000/tcp open  ibm-db2
+MAC Address: DE:AD:00:00:BE:EF (Intel Corporate)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.08 seconds
+</code></pre></div></td></tr></table></div>
+<p>To figure out more about a service that is open if we scan from port 53, we have to connect to it. We can do that with <code>nc</code> and adding the <code>-p</code> option to define the source port</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>Bonzo@htb[/htb]$ ncat -nv -p 53 10.129.2.28 50000
+
+Ncat: Version 7.80 ( https://nmap.org/ncat )
+Ncat: Connected to 10.129.2.28:50000.
+220 ProFTPd
+</code></pre></div></td></tr></table></div>
+
+
+
+
+
+                 <!-- Giscus -->
+  <h3 id="__comments">Comments</h2>
+  <p>Any feedback and suggestions are welcome. This website was created using mkdocs and the material plugin. If you
+    want, you can make a pull request. The repository is <a
+      href="https://github.com/dabonzo/itsec_hp">https://github.com/dabonzo/itsec_hp</a></p>
+  <script src="https://giscus.app/client.js" data-repo="dabonzo/itsec_hp" data-repo-id="R_kgDOH0fBLg"
+    data-category="General" data-category-id="DIC_kwDOH0fBLs4CQ1Al" data-mapping="pathname" data-strict="0"
+    data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme"
+    data-lang="en" crossorigin="anonymous" async>
+    </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme)
+
+
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function () {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function () {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+  
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "navigation.sections", "navigation.top", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+    
+  </body>
+</html>
